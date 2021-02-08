@@ -1,0 +1,17 @@
+.dropdown {
+    width: 600px;
+}
+.boxplot_class {
+    width: 800px;
+}
+.div-label {
+    font-size: larger;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+#list-sv {
+    float: right;
+}
+#dropdown-menu {
+    float: left;
+    width: 50%;
+}

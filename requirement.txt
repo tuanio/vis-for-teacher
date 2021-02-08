@@ -1,0 +1,9 @@
+requirement
+phần mềm visualize điểm cho thầy cô
+- 
+- vis theo từng cá nhân
+- xuất danh sách những sinh viên có điểm [>, <, =, <=, >=, !=] [0, 10]
+- visualize từng môn
+- miền giá trị (Q3 - Q1) của từng môn
+- hiển thị % sinh viên dưới điểm
+- pie hiện số sinh viên dưới % điểm
