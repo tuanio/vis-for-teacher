@@ -7,3 +7,6 @@ phần mềm visualize điểm cho thầy cô
 - miền giá trị (Q3 - Q1) của từng môn
 - hiển thị % sinh viên dưới điểm
 - pie hiện số sinh viên dưới % điểm
+
+- tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
+- biểu đồ cột thể hiện số lượng xếp loại mỗi môn
