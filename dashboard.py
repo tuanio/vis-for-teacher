@@ -14,7 +14,15 @@ df.drop('Unnamed: 0', axis=1, inplace=True)
 
 xeploai_df = pd.read_csv('xeploai.csv')
 
-app = dash.Dash(__name__)
+# nguồn script ở ngoài thư mục assets
+external_scripts = [
+    {
+        'src': 'https://kit.fontawesome.com/cab3a28685.js',
+        'crossorigin': 'anonymous'
+    },
+]
+
+app = dash.Dash(__name__, external_scripts=external_scripts)
 
 subjects = list(df.columns[5:-6])
 
@@ -26,22 +34,17 @@ app.layout = html.Div([
                 Phạm Thành Trung đang đứng ở top đầu lớp Thống Kê máy tính và ứng dụng. Nguyễn Văn Anh Tuấn có tiềm năng thoát top 1 từ dưới lên',
                 className='btn btn-warning'
             ),
-            html.Div(
-                html.Label(
-                    ['Môn học'],
-                    className='div-label'
-                ),
-            ),
+            html.Div(style={'height': '10px'}),
             dcc.Dropdown(
                 id='name_dropdown',
                 options=[{'label': subject, 'value': subject} for subject in subjects],
                 multi=False,
                 searchable=True,
-                placeholder='Tìm môn học...',
+                placeholder='Toán cao cấp 1',
                 value='Toán cao cấp 1',
                 className='dropdown'
             ),
-            
+            html.Div(style={'height': '10px'}),
             html.Div(
                 [
                     dcc.Graph(id='boxplot'),
@@ -57,16 +60,15 @@ app.layout = html.Div([
         [
             html.Div(
                 [
-                    html.Label('Xuất danh sách sinh viên có điểm'),
+                    html.Div('Danh sách sinh viên có điểm', style={'padding-top': '5px'}),
                     html.Div(style={'width': '10px'}),
                     dcc.Dropdown(
-                        options=[{'label': i, 'value': i} for i in ['>', '<', '>=', '<=', '!=', '=']],
+                        options=[{'label': i, 'value': i} for i in ['>', '<', '≥', '≤', '≠', '=']],
                         multi=False,
                         searchable=False,
-                        value='>=',
-                        placeholder='>=',
+                        value='≥',
+                        placeholder='≥',
                         clearable=False,
-                        style={'width': '70px', 'font-weight': 'bold'},
                         id='input_op',
                     ),
                     html.Div(style={'width': '10px'}),
@@ -74,20 +76,26 @@ app.layout = html.Div([
                         type='number',
                         id='input_score',
                         placeholder='0',
-                        style={'width': '50px'}
+                        className='form-control',
+                        style={'width': '70px'}
                     ),
+                    html.Div(style={'width': '10px'}),
+                    html.A(
+                        [html.I(className='fas fa-file-download')], 
+                        href='xeploai.csv', 
+                        className='btn btn-outline-success',
+                    )
                 ],
-                style={'display': 'flex'}
+                style={'display': 'flex', 'padding': '7px 0px'}
             ),
-            html.Table(
-                id='output_test',
-                className='table table-sm table-hover'
-            )
+            html.Div(style={'height': '10px'}),
+            html.Div(id='output_test', style={'width': '40%'})
         ],
         id='list_sv'
     )
 ], className='container')
 
+# Hàm compare dùng để sắp xếp
 # -1 if o1 < o2
 # 1 if o1 > o2
 # 0 if o1 == o2
@@ -109,6 +117,8 @@ def compare(o1, o2):
     [Input('name_dropdown', 'value')]
 )
 def generate_chart(name_dropdown):
+
+    # Trực quan cái boxplot
     fig_boxplot = px.box(
         df[subjects + ['Họ và tên']],
         y=name_dropdown,
@@ -117,21 +127,32 @@ def generate_chart(name_dropdown):
         points='all'
     )
 
+    # Đếm
     data_score = Counter(xeploai_df[name_dropdown])
+    
+    # Loại bỏ nan khỏi data sau khi đếm
     if np.nan in data_score:
         data_score.pop(np.nan)
-    print(data_score)
+
+    # Sắp xếp giảm dần theo key
     data_score = {i[0] : i[1] for i in sorted(Counter(xeploai_df[name_dropdown]).items(), key=cmp_to_key(compare)) if i[0] != np.nan}
+    
+    # Chuyển dữ liệu đếm thành một dataframe
     data_score_df = pd.DataFrame({
         'Xếp loại': data_score.keys(),
         'Số lượng': data_score.values()
     })
-    print(data_score_df)
+
+    data_score_df = data_score_df[data_score_df['Xếp loại'] != np.nan]
+
+    # Trực quan hóa
     fig_bar = px.bar(
         data_frame=data_score_df,
         x='Xếp loại',
         y='Số lượng',
     )
+
+    # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar
 
 @app.callback(
@@ -149,21 +170,44 @@ def score(input_op, input_score):
         ret = dff[dff['Điểm 4'] > input_score]
     elif (input_op == '<'):
         ret = dff[dff['Điểm 4'] < input_score]
-    elif (input_op == '>='):
+    elif (input_op == '≥'):
         ret = dff[dff['Điểm 4'] >= input_score]
-    elif (input_op == '<='):
+    elif (input_op == '≤'):
         ret = dff[dff['Điểm 4'] <= input_score]
     elif (input_op == '='):
         ret = dff[dff['Điểm 4'] == input_score]
-    elif (input_op == '!='):
+    elif (input_op == '≠'):
         ret = dff[dff['Điểm 4'] != input_score]
-    ans = html.Tbody([
-        html.Tr([
-            html.Th(i, scope='row'),
-            html.Td(j[1]),
-            html.Td(j[0])
-        ]) for i, j in zip(range(len(ret.values)), ret.values)
-    ])
+    if (len(ret.values) == 0):
+        ans = html.Div(
+            ['Không có sinh viên nào thỏa truy vấn!'],
+            role='alert',
+            className='alert alert-warning'
+        ) 
+    else:
+        ans = html.Table([
+                html.Thead([
+                    html.Tr(
+                        [
+                            html.Th(
+                                [i],
+                                scope='row',
+                            ) for i in ['#', 'Họ và tên', 'Điểm tổng kết 3 kỳ']
+                        ],
+                    ) 
+                ]),   
+                html.Tbody(
+                    [
+                        html.Tr([
+                            html.Th(i, scope='row'),
+                            html.Td(j[1]),
+                            html.Td(j[0])
+                        ]) for i, j in zip(range(len(ret.values)), ret.values)
+                    ],
+                ),
+            ],
+            className='table table-sm table-hover',
+        )
     return ans
 
 if __name__ == '__main__':
