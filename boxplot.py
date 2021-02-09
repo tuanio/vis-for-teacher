@@ -12,7 +12,6 @@ df.drop('Unnamed: 0', axis=1, inplace=True)
 app = dash.Dash(__name__)
 
 subjects = list(df.columns[5:-6])
-fig = px.box(df[subjects + ['Họ và tên']], y='Toán cao cấp 1', hover_data={'Họ và tên': True}, title='Toán cao cấp 1')
 
 app.layout = html.Div([
     html.Div(
@@ -26,7 +25,7 @@ app.layout = html.Div([
             dcc.Dropdown(
                 id='name_dropdown',
                 options=[{'label': subject, 'value': subject} for subject in subjects],
-                multi=True,
+                multi=False,
                 searchable=True,
                 placeholder='Tìm môn học...',
                 value='Toán cao cấp 1',
@@ -111,7 +110,6 @@ def score(input_op, input_score):
             html.B(' ' + str(input_score)),
             html.Label(': ' + str(len(ans)))
         ]
-
 
 if __name__ == '__main__':
     # ...
