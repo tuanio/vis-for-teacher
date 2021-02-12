@@ -11,3 +11,7 @@ phần mềm visualize điểm cho thầy cô
 - tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
 - biểu đồ cột thể hiện số lượng xếp loại mỗi môn
 - nút tải file
+
+- boxplot thể hiện rank của các thành viên trong lớp
+- số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ
+    + dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
