@@ -168,23 +168,30 @@ app.layout = html.Div([
                 ],
                 style={'width': '40%'}
             ),
+            html.Div(style={'width': '10px'}),
             html.Div(
                 [
-                    dcc.Dropdown(
-                        options=[{'label': i, 'value': i} for i in classmate],
-                        multi=False,
-                        searchable=True,
-                        value='Nguyễn Văn Anh Tuấn',
-                        placeholder='Nguyễn Văn Anh Tuấn',
-                        clearable=False,
-                        id='input_name',
-                        persistence=True,
-                        persistence_type='session'
+                    html.Div(
+                        [
+                            dcc.Dropdown(
+                                options=[{'label': i, 'value': i} for i in classmate],
+                                multi=False,
+                                searchable=True,
+                                value='Nguyễn Văn Anh Tuấn',
+                                placeholder='Nguyễn Văn Anh Tuấn',
+                                clearable=False,
+                                id='input_name',
+                                persistence=True,
+                                persistence_type='session'
+                            ),
+                        ],
+                        className='btn',
+                        style={'width': '400px'}
                     ),
                     html.Div(style={'height': '10px'}),
-                    html.Img(id='bar_chart', alt='ok', style={'width': '500px'})
+                    html.Img(id='bar_chart', alt='ok')
                 ],
-                style={'width': '30%'}
+                style={'width': '400px'}
             )
         ],
         style={"display": "flex"},
@@ -340,13 +347,34 @@ def stacked_bar(input_name):
     width = 0.5
     ind = np.arange(2)
 
-    fig, ax = plt.subplots(figsize=(5, 4))
+    fig, ax = plt.subplots(figsize=(4, 5))
 
-    plt.bar(ind, foo, width, label='Đã học', edgecolor='black')
-    plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black')
+    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color='#F1FFFA')
+    bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#D5C7BC')
 
-    plt.xticks(ind, [input_name, 'Trung bình lớp K15DS'], fontsize=13)
-    fig.suptitle('Số tín chỉ đã học của ' + input_name, fontsize=14)
+    def auto_label(rects, flag):
+        for idx, rect in enumerate(rects):
+            height = rect.get_height()
+            x = idx
+            if (flag):
+                data = foo
+                y = (rect.get_y() + rect.get_height()) / 2
+            else:
+                data = bar
+                y = (rect.get_y() + 142) / 2
+            ax.text(
+                x, y,
+                data[idx],
+                ha='center',
+                va='bottom',
+                fontsize=12
+            )
+
+    auto_label(bar1, True)
+    auto_label(bar2, False)
+
+    plt.xticks(ind, [input_name, 'Trung bình lớp K15DS'], fontsize=9)
+    fig.suptitle('Số tín chỉ đã học của ' + input_name, fontsize=11)
     plt.legend(loc='upper center')
     fig.savefig('assets/stacked_barchart/{}.png'.format(input_name))
     plt.close()
