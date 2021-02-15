@@ -1,17 +1,15 @@
-/* .dropdown {
-    width: 600px;
+#output_test {
+    overflow-y: auto;
+    height: 502px;
 }
-.boxplot_class {
-    width: 800px;
+
+#output_test th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    box-shadow: 0 5px 5px -2px rgba(0, 0, 0, 0.4);
 }
-.div-label {
-    font-size: larger;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+#output_test table {
+    position: relative;
 }
-#list-sv {
-    float: right;
-}
-#dropdown-menu {
-    float: left;
-    width: 50%;
-} */

@@ -1,4 +1,6 @@
 import pandas as pd
+pd.options.mode.chained_assignment = None # default = 'warn'
+
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -24,6 +26,7 @@ op = {
     '<': 'nho_hon',
     '≤': 'nho_hon_bang'
 }
+
 
 diem_xeploai = {
     (9, 10) : ['A+', 'Xuất sắc'],
@@ -58,14 +61,29 @@ external_scripts = [
         'src': 'https://kit.fontawesome.com/cab3a28685.js',
         'crossorigin': 'anonymous'
     },
+    {
+        'src': 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js',
+        'crossorigin': 'anonymous',
+        'integrity':"sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0",
+    }
+]
+
+external_stylesheets = [
+    {
+        'href':"https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css",
+        'rel':"stylesheet",
+        'integrity':"sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl",
+        'crossorigin':"anonymous"
+    }
 ]
 
 server = Flask(__name__)
 
-app = dash.Dash(server=server, external_scripts=external_scripts)
+app = dash.Dash(server=server, external_scripts=external_scripts, external_stylesheets=external_stylesheets)
 
 subjects = list(df.columns[5:-6])
 classmate = list(df['Họ và tên'])
+
 
 @server.route('/download/<path:path>')
 def download(path):
@@ -79,7 +97,8 @@ def get_xeploai(diem):
     if (diem >= 250):
         ok = ['Tiếng anh 1']
         if (diem >= 350):
-            ok = ['Tiếng anh 2']
+            ok += ['Tiếng anh 2']
+        # kk and kk is like "lorem ipsum"
         ok += ['kk', 'kk']
     return ok
 
@@ -94,7 +113,7 @@ def so_tin_chi_sv(name):
             flag = True
             if (len(xeploai) >= 3):
                 flag = i[0] in xeploai
-            tin_chi += tin_chi_df[i[0]].values[0]
+            tin_chi += tin_chi_df[i[0]].values[0] * flag
     return int(tin_chi)
 
 app.layout = html.Div([
@@ -111,13 +130,83 @@ app.layout = html.Div([
                 options=[{'label': subject, 'value': subject} for subject in subjects],
                 multi=False,
                 searchable=True,
-                placeholder='Toán cao cấp 1',
-                value='Toán cao cấp 1',
+                clearable=False,
+                placeholder=subjects[0],
+                value=subjects[0],
                 className='dropdown',
-                persistence=True,
+                persistence="true",
                 persistence_type='session'
             ),
             html.Div(style={'height': '10px'}),
+            html.Div(
+                [
+                    html.Button(
+                        [html.I(className='fas fa-question')],
+                        id='boxplot_helper',
+                        type='button',
+                        className='btn btn-primary dropdown-toggle',
+                        **{
+                            'data-bs-toggle': 'dropdown',
+                            'aria-expanded': 'false'
+                        }
+                    ),
+                    html.Div(
+                        [
+                            html.H4(
+                                ['Các tham số'],
+                                style={'textAlign': 'center'},
+                            ),
+                            html.Hr(className='dropdown-divider'),
+                            html.P(
+                                [html.B('max'), ' điểm cao nhất trong lớp'],
+                            ),
+                            html.P(
+                                [html.B('min'), ' điểm thấp nhất trong lớp'],
+                            ),
+                            html.P(
+                                [html.B('median(điểm giữa)'), ' mức điểm chia điểm của lớp thành 2 nửa'],
+                            ),
+                            html.P(
+                                [html.B('q1 (tứ phân vị dưới)'), ' 75% điểm của lớp nằm dưới mức điểm này'],
+                            ),
+                            html.P(
+                                [html.B('q3 (tứ phân vị trên)'), ' 25% điểm của lớp nằm dưới mức điểm này'],
+                            ),
+                            html.P(
+                                [html.B('xếp thứ tự'), ' thứ tự của sinh viên trong danh sách điểm của lớp'],
+                            ),
+                            html.Hr(className='dropdown-divider'),
+                            html.H6('IQR là độ trải giữa, phần lớn điểm tập trung ở miền này'),
+                            html.H6('lower/upper fence là hàng rào để loại bỏ ngoại lệ khỏi phần lớn dữ liệu'),
+                            html.P(
+                                [
+                                    html.Img(src='assets/imgs/iqr_formula.png')
+                                ],
+                            ),
+                            html.P(
+                                [
+                                    html.Img(src='assets/imgs/lower_fence_formula.png')
+                                ],
+                            ),
+                            html.P(
+                                [
+                                    html.Img(src='assets/imgs/upper_fence_formula.png')
+                                ],
+                            ),
+                        ],
+                        className='dropdown-menu p-4',
+                        style={
+                            'fontSize': '14px', 
+                            'max-width': '320px', 
+                            'overflowWrap': 'break-word', 
+                            'boxShadow': '2px 2px 5px 0 #585959'
+                        },
+                        **{'aria-labelledby': 'boxplot_helper'},
+                    )
+                ],
+                className='dropdown'
+            ),
+            html.Div(style={'height': '5px'}),
             html.Div(
                 [
                     dcc.Graph(id='boxplot'),
@@ -135,7 +224,13 @@ app.layout = html.Div([
                 [
                     html.Div(
                         [
-                            html.Div('Danh sách sinh viên có điểm', style={'padding-top': '5px'}),
+                            html.Div(
+                                'Danh sách sinh viên có điểm', 
+                                style={
+                                    'paddingTop': '5px',
+                                    'fontWeight': 'bold'
+                                }
+                            ),
                             html.Div(style={'width': '10px'}),
                             dcc.Dropdown(
                                 options=[{'label': i, 'value': i} for i in ['>', '<', '≥', '≤', '≠', '=']],
@@ -145,7 +240,7 @@ app.layout = html.Div([
                                 placeholder='≥',
                                 clearable=False,
                                 id='input_op',
-                                persistence=True,
+                                persistence="true",
                                 persistence_type='session'
                             ),
                             html.Div(style={'width': '10px'}),
@@ -155,17 +250,25 @@ app.layout = html.Div([
                                 placeholder='0',
                                 className='form-control',
                                 style={'width': '70px'},
-                                persistence=True,
-                                persistence_type='session'
+                                persistence="true",
+                                persistence_type='session',
+                                min='1',
+                                max='10'
                             ),
                             html.Div(style={'width': '10px'}),
                             html.Div(id='download-btn')
                         ],
-                        style={'display': 'flex', 'padding': '7px 0px'}
+                        style={
+                            'display': 'flex',
+                            'padding': '7px 0px'
+                        }
                     ),
+                    html.Div(style={'height': '10px'}),
+                    html.Div('',id='percent_of_class'),
                     html.Div(style={'height': '10px'}),
                     html.Div(id='output_test')
                 ],
+                className='show-table',
                 style={'width': '40%'}
             ),
             html.Div(style={'width': '10px'}),
@@ -177,11 +280,11 @@ app.layout = html.Div([
                                 options=[{'label': i, 'value': i} for i in classmate],
                                 multi=False,
                                 searchable=True,
-                                value='Nguyễn Văn Anh Tuấn',
-                                placeholder='Nguyễn Văn Anh Tuấn',
+                                value=classmate[0],
+                                placeholder=classmate[0],
                                 clearable=False,
                                 id='input_name',
-                                persistence=True,
+                                persistence="true",
                                 persistence_type='session'
                             ),
                         ],
@@ -191,7 +294,9 @@ app.layout = html.Div([
                     html.Div(style={'height': '10px'}),
                     html.Img(id='bar_chart', alt='ok')
                 ],
-                style={'width': '400px'}
+                style={
+                    'width': '410px', 
+                }
             )
         ],
         style={"display": "flex"},
@@ -222,14 +327,24 @@ def compare(o1, o2):
 )
 def generate_chart(name_dropdown):
 
-    # Trực quan cái boxplot
+    # dropdown_chart = df[subjects + ['Họ và tên']]
+    dropdown_chart = df[subjects + ['Họ và tên']].sort_values(by=name_dropdown, ascending=False).reset_index().copy()
+    dropdown_chart['Xếp thứ tự'] = np.arange(1, len(dropdown_chart) + 1)
+    for i in range(1, len(dropdown_chart)):
+        if (dropdown_chart.loc[i - 1, name_dropdown] == dropdown_chart.loc[i, name_dropdown]):
+            dropdown_chart['Xếp thứ tự'][i] = dropdown_chart['Xếp thứ tự'][i - 1]
+
+#    Trực quan cái boxplot
     fig_boxplot = px.box(
-        df[subjects + ['Họ và tên']],
+        dropdown_chart,
         y=name_dropdown,
-        hover_data={'Họ và tên': True},
-        title=name_dropdown,
+        hover_data={'Họ và tên': True, 'Xếp thứ tự': True},
+        title='Tổng quát điểm, thứ tự sinh viên',
         points='all'
     )
+
+    # center the title
+    fig_boxplot.update_layout(title_x=0.5)
 
     # Đếm
     data_score = Counter(xeploai_df[name_dropdown])
@@ -254,7 +369,11 @@ def generate_chart(name_dropdown):
         data_frame=data_score_df,
         x='Xếp loại',
         y='Số lượng',
+        title='Số lượng mỗi xếp loại'
     )
+
+    # center the title
+    fig_bar.update_layout(title_x=0.5)
 
     # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar
@@ -262,6 +381,7 @@ def generate_chart(name_dropdown):
 @app.callback(
     Output('output_test', 'children'),
     Output('download-btn', 'children'),
+    Output('percent_of_class', 'children'),
     [Input('input_op', 'value'), Input('input_score', 'value')]
 )
 def score(input_op, input_score):
@@ -289,6 +409,8 @@ def score(input_op, input_score):
     for i in ret.values:
         ret_df = pd.concat([ret_df, pd.DataFrame({'Mã SV': i[0], 'Họ và tên': i[1], 'Điểm tổng kết 3 kỳ': i[2]}, index=[0])], ignore_index=True)
 
+    percent = ''
+
     if (len(ret.values) == 0):
         ans = html.Div(
             ['Không có sinh viên nào thỏa truy vấn!'],
@@ -310,7 +432,7 @@ def score(input_op, input_score):
                 html.Tbody(
                     [
                         html.Tr([
-                            html.Th(i, scope='row'),
+                            html.Td(i + 1),
                             html.Td(j[0]),
                             html.Td(j[1]),
                             html.Td(j[2])
@@ -320,6 +442,8 @@ def score(input_op, input_score):
             ],
             className='table table-sm table-hover',
         )
+    
+    percent = 'Tỉ lệ sinh viên thỏa truy vấn so với lớp: {}%'.format(round(len(ret.values) / len(classmate) * 100, 2))
     
     # filename = 'csv_files/danhsach_sv_{}_{}.xlsx'.format(op[input_op], input_score)
     filename = 'list_student.xlsx'
@@ -331,7 +455,7 @@ def score(input_op, input_score):
                             href='/download/{}'.format(filename), 
                             className='btn btn-outline-success',
                         )
-    return ans, download_list_link
+    return ans, download_list_link, percent
 
 @app.callback(
     Output('bar_chart', 'src'),
@@ -349,9 +473,10 @@ def stacked_bar(input_name):
 
     fig, ax = plt.subplots(figsize=(4, 5))
 
-    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color='#F1FFFA')
-    bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#D5C7BC')
+    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color='#06BEE1')
+    bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#FFFFFF')
 
+    # Thêm chữ cho bar chart
     def auto_label(rects, flag):
         for idx, rect in enumerate(rects):
             height = rect.get_height()
@@ -373,12 +498,14 @@ def stacked_bar(input_name):
     auto_label(bar1, True)
     auto_label(bar2, False)
 
-    plt.xticks(ind, [input_name, 'Trung bình lớp K15DS'], fontsize=9)
-    fig.suptitle('Số tín chỉ đã học của ' + input_name, fontsize=11)
+    plt.xticks(ind, [input_name, 'Trung bình lớp K15DS'], fontsize=10)
+    fig.suptitle('Số tín chỉ đã tích lũy của ' + input_name, fontsize=12)
     plt.legend(loc='upper center')
+    input_name = input_name.replace(' ', '')
     fig.savefig('assets/stacked_barchart/{}.png'.format(input_name))
     plt.close()
-    return app.get_asset_url('stacked_barchart/{}.png'.format(input_name))
+    ret =  app.get_asset_url('stacked_barchart/{}.png'.format(input_name))
+    return ret
 
 if __name__ == '__main__':
     app.run_server(debug=True)

@@ -1,17 +1,18 @@
-requirement
-phần mềm visualize điểm cho thầy cô
-- 
-- vis theo từng cá nhân
-- xuất danh sách những sinh viên có điểm [>, <, =, <=, >=, !=] [0, 10]
-- visualize từng môn
-- miền giá trị (Q3 - Q1) của từng môn
-- hiển thị % sinh viên dưới điểm
+Requirement: phần mềm visualize điểm cho thầy cô
+[DONE] vis cá nhân theo tín chỉ
+[DONE] xuất danh sách những sinh viên có điểm [>, <, =, <=, >=, !=] [0, 10]
+[DONE] visualize từng môn [DONE]
+[DONE] miền giá trị (Q3 - Q1) của từng môn [DONE]
+[DONE] hiển thị % sinh viên dưới điểm
 - pie hiện số sinh viên dưới % điểm
+[DONE] tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
+[DONE] biểu đồ cột thể hiện số lượng xếp loại mỗi môn
+[DONE] nút tải file danh sách sinh viên thỏa truy vấn
+[DONE] boxplot thể hiện rank của các thành viên trong lớps
+[DONE] số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ, dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
+[DONE] nút [?] để instruction về cái biểu đồ đó, về các tham số trên biểu đồ
+[DONE] list danh sách sinh viên theo truy vấn custom lại một chiều cao nhất định, khoảng 500px, có thể cuộn
 
-- tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
-- biểu đồ cột thể hiện số lượng xếp loại mỗi môn
-- nút tải file
-
-- boxplot thể hiện rank của các thành viên trong lớp
-- số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ
-    + dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
+Bug:
+[DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
+[DONE] cái dropdown vẫn chưa chạy
