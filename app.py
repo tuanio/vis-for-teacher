@@ -48,12 +48,12 @@ diem_he4 = {
     'F': 0
 }
 
-df = pd.read_csv('cleaned_data.csv')
+df = pd.read_csv('csv_files/cleaned_data.csv')
 df.drop('Unnamed: 0', axis=1, inplace=True)
 
-xeploai_df = pd.read_csv('xeploai.csv')
+xeploai_df = pd.read_csv('csv_files/xeploai.csv')
 
-tin_chi_df = pd.read_csv('tin_chi.csv')
+tin_chi_df = pd.read_csv('csv_files/tin_chi.csv')
 
 # nguồn script ở ngoài thư mục assets
 external_scripts = [
@@ -446,7 +446,7 @@ def score(input_op, input_score):
     percent = 'Tỉ lệ sinh viên thỏa truy vấn so với lớp: {}%'.format(round(len(ret.values) / len(classmate) * 100, 2))
     
     # filename = 'csv_files/danhsach_sv_{}_{}.xlsx'.format(op[input_op], input_score)
-    filename = 'list_student.xlsx'
+    filename = 'csv_files/list_student.xlsx'
 
     ret_df.to_excel(filename)
 
