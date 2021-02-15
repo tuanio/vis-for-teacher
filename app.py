@@ -167,10 +167,10 @@ app.layout = html.Div([
                                 [html.B('median(điểm giữa)'), ' mức điểm chia điểm của lớp thành 2 nửa'],
                             ),
                             html.P(
-                                [html.B('q1 (tứ phân vị dưới)'), ' 75% điểm của lớp nằm dưới mức điểm này'],
+                                [html.B('q1 (tứ phân vị dưới)'), ' 25% điểm của lớp nằm dưới mức điểm này'],
                             ),
                             html.P(
-                                [html.B('q3 (tứ phân vị trên)'), ' 25% điểm của lớp nằm dưới mức điểm này'],
+                                [html.B('q3 (tứ phân vị trên)'), ' 75% điểm của lớp nằm dưới mức điểm này'],
                             ),
                             html.P(
                                 [html.B('xếp thứ tự'), ' thứ tự của sinh viên trong danh sách điểm của lớp'],
