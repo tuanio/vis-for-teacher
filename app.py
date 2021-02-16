@@ -79,8 +79,16 @@ external_stylesheets = [
     }
 ]
 
+env = 'production'
+
 server = Flask(__name__)
-server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vis.db'
+
+if (env == 'dev'):
+    server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vis.db'
+    server.debug = True
+else:
+    server.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nvajiwnacldrjc:8feb48b666b3b52f969d07231dc98f16fbb8eb40330b6471c672b2cfb4cdc823@ec2-3-213-85-90.compute-1.amazonaws.com:5432/d85fqrf0s08b3d'
+    server.debug = False    
 server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(server)
@@ -536,13 +544,5 @@ def stacked_bar(input_name):
     ret =  app.get_asset_url('stacked_barchart/{}.png'.format(input_name))
     return ret
 
-@server.route('/')
-def index():
-    print('ok')
-    with open('counts.txt', 'r') as f:
-        d = int(f.read())
-    with open('counts.txt', 'w') as f:
-        f.write(str(d + 1))
-
 if __name__ == '__main__':
-    server.run(debug=True)
+    server.run()
