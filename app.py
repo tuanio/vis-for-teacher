@@ -12,11 +12,13 @@ import plotly.express as px
 import plotly.graph_objects as go
 from collections import Counter
 from functools import cmp_to_key
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, url_for, redirect
 from plotly.tools import mpl_to_plotly
 import mplcursors # matplotlib hover
 matplotlib.use('Agg')
 from math import *
+
+from flask_sqlalchemy import SQLAlchemy
 
 op = {
     '=': 'bang',
@@ -78,16 +80,43 @@ external_stylesheets = [
 ]
 
 server = Flask(__name__)
+server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vis.db'
+server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(server)
 
 app = dash.Dash(server=server, external_scripts=external_scripts, external_stylesheets=external_stylesheets)
 
 subjects = list(df.columns[5:-6])
 classmate = list(df['Họ và tên'])
 
+class WebsiteTrack(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    cnts = db.Column(db.Integer, default=0)
+
+    def __repr__(self):
+        return 'Counts: %d' % (self.cnts)
 
 @server.route('/download/<path:path>')
 def download(path):
     return send_from_directory('', path, as_attachment=True)
+
+@server.route('/onload')
+def onload():
+    '''
+        - This function use to count how many times the website was loaded
+    '''
+    cnts = WebsiteTrack.query.one()
+    cnts.cnts = cnts.cnts + 1
+    db.session.commit()
+    return redirect('/')
+
+@server.route('/track')
+def track():
+    '''
+        - Page to show how many times the website was loaded
+    '''
+    return 'Passengers: ' + str(WebsiteTrack.query.one().cnts)
 
 def get_xeploai(diem):
     for i in diem_xeploai.items():
@@ -197,7 +226,7 @@ app.layout = html.Div([
                         className='dropdown-menu p-4',
                         style={
                             'fontSize': '14px', 
-                            'max-width': '320px', 
+                            'maxWidth': '320px', 
                             'overflowWrap': 'break-word', 
                             'boxShadow': '2px 2px 5px 0 #585959'
                         },
@@ -507,5 +536,13 @@ def stacked_bar(input_name):
     ret =  app.get_asset_url('stacked_barchart/{}.png'.format(input_name))
     return ret
 
+@server.route('/')
+def index():
+    print('ok')
+    with open('counts.txt', 'r') as f:
+        d = int(f.read())
+    with open('counts.txt', 'w') as f:
+        f.write(str(d + 1))
+
 if __name__ == '__main__':
-    app.run_server()
+    server.run(debug=True)
