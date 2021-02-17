@@ -4,7 +4,6 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] visualize từng môn [DONE]
 [DONE] miền giá trị (Q3 - Q1) của từng môn [DONE]
 [DONE] hiển thị % sinh viên dưới điểm
-- pie hiện số sinh viên dưới % điểm
 [DONE] tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
 [DONE] biểu đồ cột thể hiện số lượng xếp loại mỗi môn
 [DONE] nút tải file danh sách sinh viên thỏa truy vấn
@@ -13,6 +12,10 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] nút [?] để instruction về cái biểu đồ đó, về các tham số trên biểu đồ
 [DONE] list danh sách sinh viên theo truy vấn custom lại một chiều cao nhất định, khoảng 500px, có thể cuộn
 - Biểu đồ boxplot cần đổi cột x thành tên môn, cột y là điểm
+- Nút dark mode
+- pie hiện số sinh viên dưới % điểm
+- boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
+- header, logo, copyright, footer
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe

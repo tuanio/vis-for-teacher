@@ -79,6 +79,7 @@ external_stylesheets = [
     }
 ]
 
+# env = 'dev'
 env = 'production'
 
 server = Flask(__name__)
@@ -371,6 +372,8 @@ def generate_chart(name_dropdown):
         if (dropdown_chart.loc[i - 1, name_dropdown] == dropdown_chart.loc[i, name_dropdown]):
             dropdown_chart['Xếp thứ tự'][i] = dropdown_chart['Xếp thứ tự'][i - 1]
 
+    print(name_dropdown)
+
 #    Trực quan cái boxplot
     fig_boxplot = px.box(
         dropdown_chart,
@@ -503,7 +506,7 @@ def stacked_bar(input_name):
     tin_chi_tb_lop_ds = ceil(np.array([so_tin_chi_sv(i) for i in classmate]).mean())
 
     foo = [so_tin_chi_sv(input_name), tin_chi_tb_lop_ds]
-    bar = [142 - i for i in foo]
+    bar = [146 - i for i in foo]
 
     width = 0.5
     ind = np.arange(2)
