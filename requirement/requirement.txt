@@ -16,7 +16,7 @@ Requirement: phần mềm visualize điểm cho thầy cô
 - pie hiện số sinh viên dưới % điểm
 - boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
 - header, logo, copyright, footer
-- số sinh viên rớt môn đó
+- số sinh viên rớt môn đó, số sinh viên đậu môn đó
 - chỉnh các biểu đồ cho vừa màn hình
 - cho các biểu đồ vào khung
 - vẽ khung
