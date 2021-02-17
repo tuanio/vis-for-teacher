@@ -16,3 +16,4 @@ Requirement: phần mềm visualize điểm cho thầy cô
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
+[UNDONE] Biểu đồ boxplot cần đổi cột x thành tên môn, cột y là điểm
