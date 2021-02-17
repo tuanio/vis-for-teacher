@@ -12,8 +12,8 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ, dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
 [DONE] nút [?] để instruction về cái biểu đồ đó, về các tham số trên biểu đồ
 [DONE] list danh sách sinh viên theo truy vấn custom lại một chiều cao nhất định, khoảng 500px, có thể cuộn
+- Biểu đồ boxplot cần đổi cột x thành tên môn, cột y là điểm
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
-[UNDONE] Biểu đồ boxplot cần đổi cột x thành tên môn, cột y là điểm
