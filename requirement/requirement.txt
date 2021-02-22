@@ -11,15 +11,17 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ, dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
 [DONE] nút [?] để instruction về cái biểu đồ đó, về các tham số trên biểu đồ
 [DONE] list danh sách sinh viên theo truy vấn custom lại một chiều cao nhất định, khoảng 500px, có thể cuộn
-- Biểu đồ boxplot cần đổi cột x thành tên môn, cột y là điểm
+[DONE] Biểu đồ boxplot cần đổi cột x thành tên môn, cột y là điểm
 - Nút dark mode
 - pie hiện số sinh viên dưới % điểm
 - boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
-- header, logo, copyright, footer
+- header, logo, copyright, footer(50%)
 - số sinh viên rớt môn đó, số sinh viên đậu môn đó
 - chỉnh các biểu đồ cho vừa màn hình
-- cho các biểu đồ vào khung
-- vẽ khung
+[DONE] cho các biểu đồ vào khung
+[DONE] vẽ khung cho từng biểu đồ
+[DONE] thay đổi size cho từng biểu đồ
+- vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe

@@ -1,6 +1,6 @@
 #output_test {
     overflow-y: auto;
-    height: 502px;
+    height: 355px;
 }
 
 #output_test th {
@@ -12,4 +12,52 @@
 
 #output_test table {
     position: relative;
+}
+
+body {
+    background-color: rgb(245, 245, 245);
+}
+
+.graph {
+    /* border: 1px solid black; */
+    padding: 5px;
+    background-color: white;
+    border-radius: 7px;
+    transition: 0.4s;
+    border: 2px solid white;
+}
+
+.graph:hover {
+    transition: 0.4s;
+    border: 2px solid rgb(151, 151, 151);
+    /* box-shadow: 2px 2px 2px 0 rgb(109, 109, 109); */
+}
+
+.graph-boxplot {
+    margin-right: 5px;
+}
+
+.graph-bar-xeploai {
+    margin-left: 5px;
+}
+
+#second-layer {
+    margin-top: 10px;
+}
+
+.show-table {
+    height: 467px;
+}
+
+.footer {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    background-color: rgb(182, 182, 182);
+    text-align: center;
+}
+
+.footer p {
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

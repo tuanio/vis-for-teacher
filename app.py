@@ -84,17 +84,20 @@ env = 'production'
 
 server = Flask(__name__)
 
-if (env == 'dev'):
-    server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vis.db'
-    server.debug = True
-else:
-    server.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nvajiwnacldrjc:8feb48b666b3b52f969d07231dc98f16fbb8eb40330b6471c672b2cfb4cdc823@ec2-3-213-85-90.compute-1.amazonaws.com:5432/d85fqrf0s08b3d'
-    server.debug = False    
-server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(server)
 
 app = dash.Dash(server=server, external_scripts=external_scripts, external_stylesheets=external_stylesheets)
+
+
+if (env == 'dev'):
+    server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_db/vis.db'
+    server.debug = True
+    app.debug = True
+else:
+    server.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nvajiwnacldrjc:8feb48b666b3b52f969d07231dc98f16fbb8eb40330b6471c672b2cfb4cdc823@ec2-3-213-85-90.compute-1.amazonaws.com:5432/d85fqrf0s08b3d'
+    server.debug = False
+    app.debug = False    
+server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 subjects = list(df.columns[5:-6])
 classmate = list(df['Họ và tên'])
@@ -182,7 +185,7 @@ app.layout = html.Div([
                         [html.I(className='fas fa-question')],
                         id='boxplot_helper',
                         type='button',
-                        className='btn btn-primary dropdown-toggle',
+                        className='btn btn-primary dropdown-toggle btn-sm',
                         **{
                             'data-bs-toggle': 'dropdown',
                             'aria-expanded': 'false'
@@ -247,8 +250,8 @@ app.layout = html.Div([
             html.Div(style={'height': '5px'}),
             html.Div(
                 [
-                    dcc.Graph(id='boxplot'),
-                    dcc.Graph(id='bar_xeploai')
+                    html.Div(dcc.Graph(id='boxplot'), className='graph-1 graph-boxplot graph'),
+                    html.Div(dcc.Graph(id='bar_xeploai'), className='graph-1 graph-bar-xeploai graph')
                 ],
                 style={'display': 'flex'},
                 className='boxplot_class'
@@ -306,7 +309,7 @@ app.layout = html.Div([
                     html.Div(style={'height': '10px'}),
                     html.Div(id='output_test')
                 ],
-                className='show-table',
+                className='show-table graph',
                 style={'width': '40%'}
             ),
             html.Div(style={'width': '10px'}),
@@ -334,11 +337,18 @@ app.layout = html.Div([
                 ],
                 style={
                     'width': '410px', 
-                }
+                },
+                className='graph'
             )
         ],
         style={"display": "flex"},
-        id='list_sv'
+        id='second-layer'
+    ),
+    html.Div(
+        [
+            html.P(['Made by 3T Team and the respected teacher from IUH with ', html.I(className='fas fa-heart')]),
+        ],
+        className='footer graph'
     )
 ], className='container')
 
@@ -372,15 +382,20 @@ def generate_chart(name_dropdown):
         if (dropdown_chart.loc[i - 1, name_dropdown] == dropdown_chart.loc[i, name_dropdown]):
             dropdown_chart['Xếp thứ tự'][i] = dropdown_chart['Xếp thứ tự'][i - 1]
 
-    print(name_dropdown)
-
 #    Trực quan cái boxplot
     fig_boxplot = px.box(
         dropdown_chart,
         y=name_dropdown,
         hover_data={'Họ và tên': True, 'Xếp thứ tự': True},
+        points='all',
+        width=670,
+        height=350
+    )
+
+    fig_boxplot.update_layout(
         title='Tổng quát điểm, thứ tự sinh viên',
-        points='all'
+        xaxis_title=name_dropdown,
+        yaxis_title='Thang điểm',
     )
 
     # center the title
@@ -409,7 +424,9 @@ def generate_chart(name_dropdown):
         data_frame=data_score_df,
         x='Xếp loại',
         y='Số lượng',
-        title='Số lượng mỗi xếp loại'
+        title='Số lượng mỗi xếp loại',
+        width=600,
+        height=350
     )
 
     # center the title
@@ -511,7 +528,7 @@ def stacked_bar(input_name):
     width = 0.5
     ind = np.arange(2)
 
-    fig, ax = plt.subplots(figsize=(4, 5))
+    fig, ax = plt.subplots(figsize=(4, 4))
 
     bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color='#06BEE1')
     bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#FFFFFF')
