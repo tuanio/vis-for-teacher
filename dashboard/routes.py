@@ -21,7 +21,7 @@ def onload(width, height):
     cnts.cnts = cnts.cnts + 1
     db.session.commit()
 
-    print('Width: {}, Height: {}'.format(width, height))
+    # print('Width: {}, Height: {}'.format(width, height))
 
     # Reference to global variable first
 
@@ -29,9 +29,6 @@ def onload(width, height):
         datas.size_plot = datas.size_medium
     else:
         datas.size_plot = datas.size_big
-
-
-    print(datas.size_plot)
 
     return redirect('/')
 

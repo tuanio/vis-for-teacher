@@ -1,6 +1,7 @@
 import dash
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 server = Flask(__name__)
 app = dash.Dash(server=server, update_title=None, url_base_pathname='/')
@@ -28,9 +29,9 @@ app.index_string = '''
         {%metas%}
         <meta charset="utf-8">
         <title>Vis for teacher</title>
-        <link rel="icon" href="assets/imgs/icon.ico" sizes="16x16">
+        <link rel="icon" href="http://iuh.edu.vn/templates/images/icon.ico" type="image/x-icon" sizes="16x16">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
         {%css%}
     </head>
     <body>

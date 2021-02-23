@@ -217,10 +217,7 @@ def stacked_bar(input_name):
     plt.legend(loc='upper center')
     input_name = input_name.replace(' ', '')
     cwd = os.getcwd()
-    try:
-        fig.savefig('dashboard/assets/stacked_barchart/{}.png'.format(input_name))
-    except:
-        print('WOKING HERE:', cwd)
+    fig.savefig('dashboard/assets/stacked_barchart/{}.png'.format(input_name))
     plt.close()
     ret =  app.get_asset_url('stacked_barchart/{}.png'.format(input_name))
     return ret
