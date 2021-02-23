@@ -22,6 +22,7 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] vẽ khung cho từng biểu đồ
 [DONE] thay đổi size cho từng biểu đồ
 - vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
+- thay đổi tooltips khi hover cho biểu đồ cột xếp loại
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
