@@ -23,8 +23,8 @@ Requirement: phần mềm visualize điểm cho thầy cô
 - header, logo(100%), copyright, footer(50%)
 - số sinh viên rớt môn đó, số sinh viên đậu môn đó
 - vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
-- Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
-- Chỉnh các tools được sử dụng trên thanh công cụ của plotly
+- (Trung) Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
+- (Trung) Chỉnh các tools được sử dụng trên thanh công cụ của plotly
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
