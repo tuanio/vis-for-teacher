@@ -98,8 +98,8 @@ external_stylesheets = [
     }
 ]
 
-env = 'dev'
-# env = 'production'
+# env = 'dev'
+env = 'production'
 
 server = Flask(__name__)
 
