@@ -20,10 +20,10 @@ Requirement: phần mềm visualize điểm cho thầy cô
 - boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
 - header, logo, copyright, footer(50%)
 - số sinh viên rớt môn đó, số sinh viên đậu môn đó
-- chỉnh các biểu đồ cho vừa màn hình
-
+[DONE] chỉnh các biểu đồ cho vừa màn hình
 - vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
 - thay đổi tooltips khi hover cho biểu đồ cột xếp loại
+[DONE] auto resize plot khi thay đổi kích cỡ màn hình trang web (width > 1366 và width <= 1366)
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe

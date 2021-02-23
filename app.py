@@ -50,6 +50,23 @@ diem_he4 = {
     'F': 0
 }
 
+global size_big, size_medium, size_plot
+global globalFlag
+
+globalFlag = True
+
+# size of plot for screen >= 1536 x 864
+size_plot = size_big = {
+    'boxplot': (710, 330),
+    'bar_xeploai': (550, 330)
+}
+
+# size of plot for screen 1366 x 768
+size_medium = {
+    'boxplot': (600, 300),
+    'bar_xeploai': (480, 300)
+}
+
 df = pd.read_csv('csv_files/cleaned_data.csv')
 df.drop('Unnamed: 0', axis=1, inplace=True)
 
@@ -79,8 +96,8 @@ external_stylesheets = [
     }
 ]
 
-# env = 'dev'
-env = 'production'
+env = 'dev'
+# env = 'production'
 
 server = Flask(__name__)
 
@@ -113,14 +130,26 @@ class WebsiteTrack(db.Model):
 def download(path):
     return send_from_directory('', path, as_attachment=True)
 
-@server.route('/onload')
-def onload():
+@server.route('/onload/<int:width>/<int:height>')
+def onload(width, height):
     '''
         - This function use to count how many times the website was loaded
+        - Load the screen of website
     '''
     cnts = WebsiteTrack.query.one()
     cnts.cnts = cnts.cnts + 1
     db.session.commit()
+
+    print('Width: {}, Height: {}'.format(width, height))
+
+    # Reference to global variable first
+    global size_medium, size_big, size_plot
+
+    if (width <= 1366):
+        size_plot = size_medium
+    else:
+        size_plot = size_big
+
     return redirect('/')
 
 @server.route('/track')
@@ -250,8 +279,16 @@ app.layout = html.Div([
             html.Div(style={'height': '5px'}),
             html.Div(
                 [
-                    html.Div(dcc.Graph(id='boxplot'), className='graph-1 graph-boxplot graph'),
-                    html.Div(dcc.Graph(id='bar_xeploai'), className='graph-1 graph-bar-xeploai graph')
+                    html.Div(
+                        dcc.Graph(id='boxplot'),
+                        id='div-boxplot',
+                        className='graph-1 graph-boxplot graph'
+                    ),
+                    html.Div(
+                        dcc.Graph(id='bar_xeploai'),
+                        id='div-bar-xeploai',
+                        className='graph-1 graph-bar-xeploai graph'
+                    )
                 ],
                 style={'display': 'flex'},
                 className='boxplot_class'
@@ -382,14 +419,16 @@ def generate_chart(name_dropdown):
         if (dropdown_chart.loc[i - 1, name_dropdown] == dropdown_chart.loc[i, name_dropdown]):
             dropdown_chart['Xếp thứ tự'][i] = dropdown_chart['Xếp thứ tự'][i - 1]
 
+    global size_plot
+
 #    Trực quan cái boxplot
     fig_boxplot = px.box(
         dropdown_chart,
         y=name_dropdown,
         hover_data={'Họ và tên': True, 'Xếp thứ tự': True},
         points='all',
-        width=670,
-        height=350
+        width=size_plot['boxplot'][0],
+        height=size_plot['boxplot'][1]
     )
 
     fig_boxplot.update_layout(
@@ -400,6 +439,7 @@ def generate_chart(name_dropdown):
 
     # center the title
     fig_boxplot.update_layout(title_x=0.5)
+    fig_boxplot.update_layout(hovermode="closest")
 
     # Đếm
     data_score = Counter(xeploai_df[name_dropdown])
@@ -425,12 +465,13 @@ def generate_chart(name_dropdown):
         x='Xếp loại',
         y='Số lượng',
         title='Số lượng mỗi xếp loại',
-        width=600,
-        height=350
+        width=size_plot['bar_xeploai'][0],
+        height=size_plot['bar_xeploai'][1]
     )
 
     # center the title
     fig_bar.update_layout(title_x=0.5)
+    fig_bar.update_layout(hovermode="y unified")
 
     # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar
@@ -565,4 +606,4 @@ def stacked_bar(input_name):
     return ret
 
 if __name__ == '__main__':
-    server.run()
+    app.run_server()
