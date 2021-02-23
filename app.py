@@ -194,14 +194,30 @@ app.layout = html.Div([
             html.Div(
                 [
                     html.Div(
-                        html.Img(
-
-                        ),
+                        [
+                            html.Div(
+                                html.Img(
+                                    src='assets/imgs/logo_iuh.png',
+                                    className='img-thumbneil float-left logo-img logo-img-iuh',
+                                ),
+                                id='logo-iuh',
+                                className='logo'
+                            ),
+                            html.Div(
+                                html.Img(
+                                    src='assets/imgs/logo_k15ds.png',
+                                    className='img-thumbneil float-left logo-img logo-img-k15ds',
+                                ),
+                                id='logo-k15ds',
+                                className='logo'
+                            ),
+                        ],
+                        id='header'
                     ),
                     html.Marquee(
                         'Huỳnh Minh Toàn đang xếp thứ I trong lớp Lập trình phân tích dữ liệu\
                         Phạm Thành Trung đang đứng ở top đầu lớp Thống Kê máy tính và ứng dụng. Nguyễn Văn Anh Tuấn có tiềm năng thoát top 1 từ dưới lên',
-                        className='btn btn-warning'
+                        className='btn btn-success'
                     ),
                 ],
             ),
@@ -214,7 +230,7 @@ app.layout = html.Div([
                                 [html.I(className='fas fa-question')],
                                 id='boxplot_helper',
                                 type='button',
-                                className='btn btn-primary dropdown-toggle',
+                                className='btn btn-success dropdown-toggle',
                                 **{
                                     'data-bs-toggle': 'dropdown',
                                     'aria-expanded': 'false'
@@ -294,7 +310,6 @@ app.layout = html.Div([
                 style={'display': 'flex'}
             ),
             html.Div(style={'height': '10px'}),
-            
             html.Div(style={'height': '5px'}),
             html.Div(
                 [
@@ -492,7 +507,7 @@ def generate_chart(name_dropdown):
 
     # center the title
     fig_bar.update_layout(title_x=0.5)
-    fig_bar.update_layout(hovermode="y unified")
+    # fig_bar.update_layout(hovermode="y")
 
     # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar
@@ -592,7 +607,7 @@ def stacked_bar(input_name):
 
     fig, ax = plt.subplots(figsize=(4, 4))
 
-    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor=color, color=color)
+    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color=color)
     bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#FFFFFF')
 
     # Thêm chữ cho bar chart

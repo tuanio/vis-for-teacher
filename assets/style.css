@@ -61,3 +61,29 @@ body {
     font-weight: bold;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+#header {
+    margin: 10px 0;
+    display: flex;
+}
+
+.logo {
+    /* border: 1px solid black; */
+    padding: 5px;
+}
+
+.logo-img {
+    /* border: 1px solid black; */
+}
+
+.logo-img-iuh {
+    width: 200px;
+}
+
+.logo-img-k15ds {
+    width: 100px;
+}
+
+#logo-k15ds {
+    padding-top: 18px;
+}
