@@ -20,6 +20,8 @@ from math import *
 
 from flask_sqlalchemy import SQLAlchemy
 
+color = '#499167'
+
 op = {
     '=': 'bang',
     '≠': 'khac',
@@ -96,8 +98,8 @@ external_stylesheets = [
     }
 ]
 
-# env = 'dev'
-env = 'production'
+env = 'dev'
+# env = 'production'
 
 server = Flask(__name__)
 
@@ -189,93 +191,110 @@ def so_tin_chi_sv(name):
 app.layout = html.Div([
     html.Div(
         [
-            html.Marquee(
-                'Huỳnh Minh Toàn đang xếp thứ I trong lớp Lập trình phân tích dữ liệu\
-                Phạm Thành Trung đang đứng ở top đầu lớp Thống Kê máy tính và ứng dụng. Nguyễn Văn Anh Tuấn có tiềm năng thoát top 1 từ dưới lên',
-                className='btn btn-warning'
-            ),
-            html.Div(style={'height': '10px'}),
-            dcc.Dropdown(
-                id='name_dropdown',
-                options=[{'label': subject, 'value': subject} for subject in subjects],
-                multi=False,
-                searchable=True,
-                clearable=False,
-                placeholder=subjects[0],
-                value=subjects[0],
-                className='dropdown',
-                persistence="true",
-                persistence_type='session'
+            html.Div(
+                [
+                    html.Div(
+                        html.Img(
+
+                        ),
+                    ),
+                    html.Marquee(
+                        'Huỳnh Minh Toàn đang xếp thứ I trong lớp Lập trình phân tích dữ liệu\
+                        Phạm Thành Trung đang đứng ở top đầu lớp Thống Kê máy tính và ứng dụng. Nguyễn Văn Anh Tuấn có tiềm năng thoát top 1 từ dưới lên',
+                        className='btn btn-warning'
+                    ),
+                ],
             ),
             html.Div(style={'height': '10px'}),
             html.Div(
                 [
-                    html.Button(
-                        [html.I(className='fas fa-question')],
-                        id='boxplot_helper',
-                        type='button',
-                        className='btn btn-primary dropdown-toggle btn-sm',
-                        **{
-                            'data-bs-toggle': 'dropdown',
-                            'aria-expanded': 'false'
-                        }
-                    ),
                     html.Div(
                         [
-                            html.H4(
-                                ['Các tham số'],
-                                style={'textAlign': 'center'},
+                            html.Button(
+                                [html.I(className='fas fa-question')],
+                                id='boxplot_helper',
+                                type='button',
+                                className='btn btn-primary dropdown-toggle',
+                                **{
+                                    'data-bs-toggle': 'dropdown',
+                                    'aria-expanded': 'false'
+                                }
                             ),
-                            html.Hr(className='dropdown-divider'),
-                            html.P(
-                                [html.B('max'), ' điểm cao nhất trong lớp'],
-                            ),
-                            html.P(
-                                [html.B('min'), ' điểm thấp nhất trong lớp'],
-                            ),
-                            html.P(
-                                [html.B('median(điểm giữa)'), ' mức điểm chia điểm của lớp thành 2 nửa'],
-                            ),
-                            html.P(
-                                [html.B('q1 (tứ phân vị dưới)'), ' 25% điểm của lớp nằm dưới mức điểm này'],
-                            ),
-                            html.P(
-                                [html.B('q3 (tứ phân vị trên)'), ' 75% điểm của lớp nằm dưới mức điểm này'],
-                            ),
-                            html.P(
-                                [html.B('xếp thứ tự'), ' thứ tự của sinh viên trong danh sách điểm của lớp'],
-                            ),
-                            html.Hr(className='dropdown-divider'),
-                            html.H6('IQR là độ trải giữa, phần lớn điểm tập trung ở miền này'),
-                            html.H6('lower/upper fence là hàng rào để loại bỏ ngoại lệ khỏi phần lớn dữ liệu'),
-                            html.P(
+                            html.Div(
                                 [
-                                    html.Img(src='assets/imgs/iqr_formula.png')
+                                    html.H4(
+                                        ['Các tham số'],
+                                        style={'textAlign': 'center'},
+                                    ),
+                                    html.Hr(className='dropdown-divider'),
+                                    html.P(
+                                        [html.B('max'), ' điểm cao nhất trong lớp'],
+                                    ),
+                                    html.P(
+                                        [html.B('min'), ' điểm thấp nhất trong lớp'],
+                                    ),
+                                    html.P(
+                                        [html.B('median(điểm giữa)'), ' mức điểm chia điểm của lớp thành 2 nửa'],
+                                    ),
+                                    html.P(
+                                        [html.B('q1 (tứ phân vị dưới)'), ' 25% điểm của lớp nằm dưới mức điểm này'],
+                                    ),
+                                    html.P(
+                                        [html.B('q3 (tứ phân vị trên)'), ' 75% điểm của lớp nằm dưới mức điểm này'],
+                                    ),
+                                    html.P(
+                                        [html.B('xếp thứ tự'), ' thứ tự của sinh viên trong danh sách điểm của lớp'],
+                                    ),
+                                    html.Hr(className='dropdown-divider'),
+                                    html.H6('IQR là độ trải giữa, phần lớn điểm tập trung ở miền này'),
+                                    html.H6('lower/upper fence là hàng rào để loại bỏ ngoại lệ khỏi phần lớn dữ liệu'),
+                                    html.P(
+                                        [
+                                            html.Img(src='assets/imgs/iqr_formula.png')
+                                        ],
+                                    ),
+                                    html.P(
+                                        [
+                                            html.Img(src='assets/imgs/lower_fence_formula.png')
+                                        ],
+                                    ),
+                                    html.P(
+                                        [
+                                            html.Img(src='assets/imgs/upper_fence_formula.png')
+                                        ],
+                                    ),
                                 ],
-                            ),
-                            html.P(
-                                [
-                                    html.Img(src='assets/imgs/lower_fence_formula.png')
-                                ],
-                            ),
-                            html.P(
-                                [
-                                    html.Img(src='assets/imgs/upper_fence_formula.png')
-                                ],
-                            ),
+                                className='dropdown-menu p-4',
+                                style={
+                                    'fontSize': '14px', 
+                                    'maxWidth': '320px', 
+                                    'overflowWrap': 'break-word', 
+                                    'boxShadow': '2px 2px 5px 0 #585959'
+                                },
+                                **{'aria-labelledby': 'boxplot_helper'},
+                            )
                         ],
-                        className='dropdown-menu p-4',
-                        style={
-                            'fontSize': '14px', 
-                            'maxWidth': '320px', 
-                            'overflowWrap': 'break-word', 
-                            'boxShadow': '2px 2px 5px 0 #585959'
-                        },
-                        **{'aria-labelledby': 'boxplot_helper'},
-                    )
+                        className='dropdown'
+                    ),
+                    html.Div(style={'width': '10px'}),
+                    dcc.Dropdown(
+                        id='name_dropdown',
+                        options=[{'label': subject, 'value': subject} for subject in subjects],
+                        multi=False,
+                        searchable=True,
+                        clearable=False,
+                        placeholder=subjects[0],
+                        value=subjects[0],
+                        className='dropdown',
+                        persistence="true",
+                        persistence_type='session',
+                        style={'width': '100%'},
+                    ),
                 ],
-                className='dropdown'
+                style={'display': 'flex'}
             ),
+            html.Div(style={'height': '10px'}),
+            
             html.Div(style={'height': '5px'}),
             html.Div(
                 [
@@ -428,7 +447,8 @@ def generate_chart(name_dropdown):
         hover_data={'Họ và tên': True, 'Xếp thứ tự': True},
         points='all',
         width=size_plot['boxplot'][0],
-        height=size_plot['boxplot'][1]
+        height=size_plot['boxplot'][1],
+        color_discrete_sequence=[color]
     )
 
     fig_boxplot.update_layout(
@@ -466,7 +486,8 @@ def generate_chart(name_dropdown):
         y='Số lượng',
         title='Số lượng mỗi xếp loại',
         width=size_plot['bar_xeploai'][0],
-        height=size_plot['bar_xeploai'][1]
+        height=size_plot['bar_xeploai'][1],
+        color_discrete_sequence=[color]
     )
 
     # center the title
@@ -571,7 +592,7 @@ def stacked_bar(input_name):
 
     fig, ax = plt.subplots(figsize=(4, 4))
 
-    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color='#06BEE1')
+    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor=color, color=color)
     bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#FFFFFF')
 
     # Thêm chữ cho bar chart

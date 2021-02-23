@@ -1,6 +1,6 @@
 #output_test {
     overflow-y: auto;
-    height: 370px;
+    height: 365px;
 }
 
 #output_test th {
@@ -29,7 +29,7 @@ body {
 
 .graph:hover {
     transition: 0.4s;
-    border: 2px solid rgb(151, 151, 151);
+    border: 2px solid #499167;
     /* box-shadow: 2px 2px 2px 0 rgb(109, 109, 109); */
 }
 
@@ -46,7 +46,7 @@ body {
 }
 
 .show-table {
-    height: 467px;
+    height: 474px;
 }
 
 .footer {
