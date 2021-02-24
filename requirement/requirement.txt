@@ -7,7 +7,7 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
 [DONE] biểu đồ cột thể hiện số lượng xếp loại mỗi môn
 [DONE] nút tải file danh sách sinh viên thỏa truy vấn
-[DONE] boxplot thể hiện rank của các thành viên trong lớps
+[DONE] boxplot thể hiện rank của các thành viên trong lớp
 [DONE] số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ, dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
 [DONE] nút [?] để instruction về cái biểu đồ đó, về các tham số trên biểu đồ
 [DONE] list danh sách sinh viên theo truy vấn custom lại một chiều cao nhất định, khoảng 500px, có thể cuộn
