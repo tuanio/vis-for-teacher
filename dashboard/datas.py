@@ -56,6 +56,3 @@ tin_chi_df = pd.read_csv('dashboard/csv_files/tin_chi.csv')
 
 subjects = list(df.columns[5:-6])
 classmate = list(df['Họ và tên'])
-
-
-
