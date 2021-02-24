@@ -41,22 +41,30 @@ def generate_chart(name_dropdown):
     fig_boxplot = px.box(
         dropdown_chart,
         y=name_dropdown,
-        hover_data={'Họ và tên': True, 'Xếp thứ tự': True},
         points='all',
         width=datas.size_plot['boxplot'][0],
         height=datas.size_plot['boxplot'][1],
         color_discrete_sequence=[color]
     )
 
+    # Config hovertemplate
+    fig_boxplot.update_traces(
+        hovertemplate=
+            '<i><b>Họ và tên:</b> %{customdata[0]}</i><extra></extra><br>' +
+            '<i><b>Điểm:</b> %{y}</i><br>' +
+            '<i><b>Xếp hạng:</b> %{customdata[1]}</i>',
+        customdata = pd.DataFrame({
+            0: dropdown_chart['Họ và tên'].tolist(),
+            1: dropdown_chart['Xếp thứ tự'].tolist()
+        })
+    )
+
     fig_boxplot.update_layout(
         title='Tổng quát điểm, thứ tự sinh viên',
         xaxis_title=name_dropdown,
         yaxis_title='Thang điểm',
+        title_x=0.5
     )
-
-    # center the title
-    fig_boxplot.update_layout(title_x=0.5)
-    fig_boxplot.update_layout(hovermode="closest")
 
     # Đếm
     data_score = Counter(xeploai_df[name_dropdown])
@@ -87,9 +95,15 @@ def generate_chart(name_dropdown):
         color_discrete_sequence=[color]
     )
 
+    # Config hovertemplate
+    fig_bar.update_traces(
+        hovertemplate=
+            '<i><b>Xếp loại:</b> %{x}</i><extra></extra><br>' + 
+            '<i><b>Số lượng:</b> %{y}</i>'
+    )
+
     # center the title
     fig_bar.update_layout(title_x=0.5)
-    # fig_bar.update_layout(hovermode="y")
 
     # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar

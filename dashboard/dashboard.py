@@ -142,12 +142,25 @@ app.layout = html.Div([
             html.Div(
                 [
                     html.Div(
-                        dcc.Graph(id='boxplot'),
+                        dcc.Graph(
+                            id='boxplot',
+                            config={'modeBarButtonsToRemove': ['pan2d', "select2d", "lasso2d", "zoomIn2d",
+                                "zoomOut2d", "autoScale2d", 'toggleSpikelines'],
+                                "scrollZoom": True,
+                                "displaylogo": False
+                            }
+                        ),
                         id='div-boxplot',
                         className='graph-1 graph-boxplot graph'
                     ),
                     html.Div(
-                        dcc.Graph(id='bar_xeploai'),
+                        dcc.Graph(
+                            id='bar_xeploai',
+                            config={'modeBarButtonsToRemove': ['pan2d', "select2d", "lasso2d", "zoomIn2d",
+                                "zoomOut2d", "autoScale2d", 'toggleSpikelines', 'hoverCompareCartesian'],
+                                "displaylogo": False
+                            }
+                        ),
                         id='div-bar-xeploai',
                         className='graph-1 graph-bar-xeploai graph'
                     )
