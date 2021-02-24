@@ -17,15 +17,16 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] thay đổi size cho từng biểu đồ
 [DONE] chỉnh các biểu đồ cho vừa màn hình
 [DONE] auto resize plot khi thay đổi kích cỡ màn hình trang web (width > 1366 và width <= 1366)
+[DONE] Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
+[DONE] Chỉnh các tools được sử dụng trên thanh công cụ của plotly
 - (Trung) Nút dark mode
 - pie hiện số sinh viên dưới % điểm
 - boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
 - header, logo(100%), copyright, footer(50%)
 - số sinh viên rớt môn đó, số sinh viên đậu môn đó
 - vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
-- (Trung) Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
-- (Trung) Chỉnh các tools được sử dụng trên thanh công cụ của plotly
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
+- Lỗi sắp xếp thứ tự các xếp loại của bar_chart
