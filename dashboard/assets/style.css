@@ -1,5 +1,9 @@
+:root {
+    --color_of_vis: #499167;
+}
+
 #output_test {
-    overflow-y: auto;
+    overflow-y: auto; 
     height: 365px;
 }
 
@@ -29,7 +33,7 @@ body {
 
 .graph:hover {
     transition: 0.4s;
-    border: 2px solid #499167;
+    border: 2px solid var(--color_of_vis);
     /* box-shadow: 2px 2px 2px 0 rgb(109, 109, 109); */
 }
 
@@ -81,4 +85,108 @@ body {
 
 .container {
     width: 1500px;
+}
+
+#show-note {
+    overflow-y: auto;
+    height: 310px;
+    padding: 10px;
+    /* border: 1px solid black; */
+}
+
+.note-component {
+    margin: 0 0 0 10px;
+    width: 95%;
+    display: flex;
+    border: 2.3px solid black;
+    border-radius: 13px;
+    margin: 0 0 10px 0;
+    transition: 0.2s;
+    background-color: white;
+}
+
+.note-component:hover {
+    border: 2.3px solid var(--color_of_vis);
+    transition: 0.2s;
+    background-color: rgb(98, 252, 175);
+}
+
+.note-div {
+    width: 100%;
+    display: block;
+}
+
+.note-a {
+    text-decoration: none;
+    display: block;
+    padding: 10px 5px 0 5px;
+}
+
+.note-big-label {
+    color: black;
+}
+
+.note-a {
+    text-align: left;
+    display: block;
+}
+
+.note-sm-label {
+    color: gray;
+    font-size: smaller;
+}
+
+.note-container {
+    display: none;
+    width: 375px;
+    height: 367px;
+    margin: 5px 0 0 0;
+}
+
+.note-container-edit {
+    /* display: none; */
+    width: 375px;
+    height: 367px;
+    margin: 5px 0 0 0;
+}
+
+#edit-note {
+    padding: 10px;
+}
+
+#note-edit-tools {
+    display: flex;
+    margin: 0 auto;
+    margin: 10px 0 0 0;
+}
+
+#note-edit-tools a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+#note-edit-save {
+    width: 75%;
+    margin: 0 5px 0 0;
+}
+
+#note-edit-remove {
+    width: 20%;
+    margin: 0 0 0 5px;
+}
+
+#note-edit-title input {
+    width: 100%;
+}
+
+#note-edit-content {
+    margin: 10px 0 0 0;
+}
+
+#note-edit-content textarea {
+    width: 100%;
+    height: 210px;
+    resize: none;
 }

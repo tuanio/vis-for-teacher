@@ -41,22 +41,30 @@ def generate_chart(name_dropdown):
     fig_boxplot = px.box(
         dropdown_chart,
         y=name_dropdown,
-        hover_data={'Họ và tên': True, 'Xếp thứ tự': True},
         points='all',
         width=datas.size_plot['boxplot'][0],
         height=datas.size_plot['boxplot'][1],
         color_discrete_sequence=[color]
     )
 
+    # Config hovertemplate
+    fig_boxplot.update_traces(
+        hovertemplate=
+            '<i><b>Họ và tên:</b> %{customdata[0]}</i><extra></extra><br>' +
+            '<i><b>Điểm:</b> %{y}</i><br>' +
+            '<i><b>Xếp hạng:</b> %{customdata[1]}</i>',
+        customdata = pd.DataFrame({
+            0: dropdown_chart['Họ và tên'].tolist(),
+            1: dropdown_chart['Xếp thứ tự'].tolist()
+        })
+    )
+
     fig_boxplot.update_layout(
         title='Tổng quát điểm, thứ tự sinh viên',
         xaxis_title=name_dropdown,
         yaxis_title='Thang điểm',
+        title_x=0.5
     )
-
-    # center the title
-    fig_boxplot.update_layout(title_x=0.5)
-    fig_boxplot.update_layout(hovermode="closest")
 
     # Đếm
     data_score = Counter(xeploai_df[name_dropdown])
@@ -87,9 +95,15 @@ def generate_chart(name_dropdown):
         color_discrete_sequence=[color]
     )
 
+    # Config hovertemplate
+    fig_bar.update_traces(
+        hovertemplate=
+            '<i><b>Xếp loại:</b> %{x}</i><extra></extra><br>' + 
+            '<i><b>Số lượng:</b> %{y}</i>'
+    )
+
     # center the title
     fig_bar.update_layout(title_x=0.5)
-    # fig_bar.update_layout(hovermode="y")
 
     # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar
@@ -167,7 +181,9 @@ def score(input_op, input_score):
     ret_df.to_excel(filename)
 
     download_list_link = html.A(
-                            [html.I(className='fas fa-file-download')], 
+                            [
+                                html.I(className='fas fa-file-download')
+                            ], 
                             href='/download/{}'.format(filename), 
                             className='btn btn-outline-success',
                         )
@@ -192,6 +208,9 @@ def stacked_bar(input_name):
     bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color=color)
     bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#FFFFFF')
 
+    # so_tin_chi_cua_nganh 
+    so_tin_chi_cua_nganh = 146
+
     # Thêm chữ cho bar chart
     def auto_label(rects, flag):
         for x, rect in enumerate(rects):
@@ -200,7 +219,7 @@ def stacked_bar(input_name):
                 y = (rect.get_y() + rect.get_height()) / 2
             else:
                 data = bar
-                y = (rect.get_y() + 142) / 2
+                y = (rect.get_y() + so_tin_chi_cua_nganh) / 2
             ax.text(
                 x, y,
                 data[x],
@@ -217,7 +236,51 @@ def stacked_bar(input_name):
     plt.legend(loc='upper center')
     input_name = input_name.replace(' ', '')
     cwd = os.getcwd()
+
     fig.savefig('dashboard/assets/stacked_barchart/{}.png'.format(input_name))
     plt.close()
     ret =  app.get_asset_url('stacked_barchart/{}.png'.format(input_name))
     return ret
+
+@app.callback(
+    Output('show-note', 'children'),
+    [Input('dropdown_note', 'value')]
+)
+def callback_note(note_name):
+    '''
+        Sẽ có thêm cái tham số user id, trước tiên chỉ lấy với tên sinh viên thôi
+    '''
+    # default 
+    user_id = 0
+
+    data = Note.query.filter_by(author_id=user_id, student_name=note_name).all()
+
+    return [
+        html.Div(
+            [
+                html.Div(
+                    [
+                        html.A(
+                            [
+                                html.H5(
+                                    [i.title_shorten],
+                                    className='note-big-label'
+                                ),
+                                html.P(
+                                    [
+                                        'Cập nhật mới nhất: %02d:%02d %02d/%02d/%04d'%(i.date_update.hour, i.date_update.minute, i.date_update.day, i.date_update.month, i.date_update.year)
+                                    ],
+                                    className='note-sm-label',
+                                )
+                            ],
+                            href='javascript:void(0);',
+                            className='note-a',
+                            **{'data-id': str(i.id)}
+                        ),
+                    ],
+                    className='note-div'
+                ),
+            ],
+            className='note-component'
+        ) for i in data
+    ]

@@ -25,6 +25,7 @@ Requirement: phần mềm visualize điểm cho thầy cô
 - vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
 - (Trung) Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
 - (Trung) Chỉnh các tools được sử dụng trên thanh công cụ của plotly
+- Chỉnh dark mode theo giờ
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe

@@ -142,12 +142,25 @@ app.layout = html.Div([
             html.Div(
                 [
                     html.Div(
-                        dcc.Graph(id='boxplot'),
+                        dcc.Graph(
+                            id='boxplot',
+                            config={'modeBarButtonsToRemove': ['pan2d', "select2d", "lasso2d", "zoomIn2d",
+                                "zoomOut2d", "autoScale2d", 'toggleSpikelines'],
+                                "scrollZoom": True,
+                                "displaylogo": False
+                            }
+                        ),
                         id='div-boxplot',
                         className='graph-1 graph-boxplot graph'
                     ),
                     html.Div(
-                        dcc.Graph(id='bar_xeploai'),
+                        dcc.Graph(
+                            id='bar_xeploai',
+                            config={'modeBarButtonsToRemove': ['pan2d', "select2d", "lasso2d", "zoomIn2d",
+                                "zoomOut2d", "autoScale2d", 'toggleSpikelines', 'hoverCompareCartesian'],
+                                "displaylogo": False
+                            }
+                        ),
                         id='div-bar-xeploai',
                         className='graph-1 graph-bar-xeploai graph'
                     )
@@ -238,7 +251,143 @@ app.layout = html.Div([
                     'width': '410px', 
                 },
                 className='graph'
-            )
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    html.P(
+                                        [
+                                            html.I(className='fas fa-clipboard', style={'margin-right': '5px'}),
+                                            html.Span('Ghi chú sinh viên'),
+                                        ],
+                                        style={
+                                            'marginTop': '5px',
+                                            'textAlign': 'center',
+                                            'fontWeight': 'bold',
+                                            'fontSize': 'large',
+                                        },
+                                    )
+                                ],
+                            ),
+                            html.Div(
+                                [
+                                    html.Div(
+                                        dcc.Dropdown(
+                                            options=[{'label': i, 'value': i} for i in classmate],
+                                            multi=False,
+                                            searchable=True,
+                                            value=classmate[0],
+                                            placeholder=classmate[0],
+                                            clearable=False,
+                                            id='dropdown_note',
+                                            persistence='true',
+                                            persistence_type='session',
+                                        ),
+                                        style={
+                                            'width': '300px',
+                                            'margin-right': '10px'
+                                        },
+                                    ),
+                                    html.Div(
+                                        html.A(
+                                            [html.I(className='fas fa-comment-dots')],
+                                            href='javascript:void(0);',
+                                            className='btn btn-outline-success',
+                                            id='show-note-btn-a'
+                                        ),
+                                        id='show-note-btn'
+                                    ),
+                                ],
+                                style={'display': 'flex'},
+                            ),
+                        ],
+                        style={
+                            'height': '100px',
+                            'width': '375px',
+                            'padding': '5px',
+                        },
+                        className='graph'
+                    ),
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    html.A(
+                                        [html.I(className='fas fa-plus')],
+                                        href='javascript:void(0);',
+                                        className='btn btn-outline-dark',
+                                    ),
+                                ],
+                                id='add-note-btn'
+                            ),
+                            html.Div(
+                                html.Div(id='show-note'),
+                                style={'margin': '10px 0 0 0'}
+                            ),
+                        ],
+                        **{'data-flag': '0'},
+                        className='graph note-container',
+                    ),
+
+                    # template of edit note
+                    html.Div(
+                        [
+                            html.Div(
+                                html.P(
+                                    'Cập nhật mới nhất: 17:51 26/02/2021',
+                                    className='note-sm-label'
+                                )
+                            ),
+                            html.Div(
+                                dcc.Input(
+                                    type='text',
+                                    placeholder='Tiêu đề',
+                                    className='form-control'
+                                ),
+                                id='note-edit-title'
+                            ),
+                            html.Div(
+                                dcc.Textarea(
+                                    placeholder='Nội dung ghi chú',
+                                    id='note-edit-txtarea',
+                                    className='form-control'
+                                ),
+                                id='note-edit-content'
+                            ),
+                            html.Div(
+                                [
+                                    html.Div(
+                                        html.A(
+                                            'Lưu thay đổi',
+                                            href='javascript:void(0);',
+                                            className='btn btn-outline-success'
+                                        ),
+                                        id='note-edit-save',
+                                    ),
+                                    html.Div(
+                                        html.A(
+                                            html.I(className='fas fa-trash'),
+                                            href='javascript:void(0);',
+                                            className='btn btn-outline-dark'
+                                        ),
+                                        id='note-edit-remove',
+                                    )
+                                ],
+                                id='note-edit-tools'
+                            ),
+                        ],
+                        **{'data-id': '0'},
+                        id='edit-note',
+                        className='graph note-container-edit'
+                    )
+                ],
+                style={
+                    'margin-left': '10px',
+                }
+            ),
         ],
         style={"display": "flex"},
         id='second-layer'

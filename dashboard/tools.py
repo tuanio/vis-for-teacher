@@ -1,6 +1,8 @@
 from dashboard.datas import *
 import dashboard.datas as datas
 import numpy as np
+from dashboard import db
+from dashboard.models import User, Note
 
 datas.init()
 
@@ -46,3 +48,7 @@ def compare(o1, o2):
     if (o1[0] == o2[0]):
         return [1, -1][len(o1) == 2]
     return [1, -1][o1[0] < o2[0]]
+
+def generate_note(user_id, student):
+    ''' generate default note '''
+    return Note.query.filter_by(author_id=user_id, student_name=student).all()

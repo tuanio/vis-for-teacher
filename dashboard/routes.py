@@ -1,9 +1,10 @@
 from dashboard.models import WebsiteTrack
 from dashboard import server
-from flask import render_template, url_for, redirect, send_from_directory
+from flask import render_template, url_for, redirect, send_from_directory, jsonify
 from dashboard import db
 from dashboard.datas import *
 import dashboard.datas as datas
+from dashboard.models import *
 
 datas.init()
 
@@ -38,3 +39,25 @@ def track():
         - Page to show how many times the website was loaded
     '''
     return 'Passengers: ' + str(WebsiteTrack.query.one().cnts)
+
+@server.route('/add-note/<string:student_name>')
+def add_note(student_name):
+    '''
+        Dùng user_id mặc định là 0, sau này sửa lại sau
+    '''
+    user_id = 0
+    new_note = Note(
+        author_id=user_id,
+        title='',
+        title_shorten='Tiêu đề ghi chú...',
+        content='',
+        student_name=student_name
+    )
+
+    db.session.add(new_note)
+    db.session.commit()
+
+    new_note = Note.query.all()[-1]
+
+    # turn back to dashboard
+    return jsonify(id=new_note.id)
