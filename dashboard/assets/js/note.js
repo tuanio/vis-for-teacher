@@ -79,7 +79,7 @@ function viewNote(id) {
                 <p class="note-sm-label">Cập nhật mới nhất: ${data['date_update_format']}</p>
             </div>
             <div id="note-edit-title">
-                <input type="text" id="note-edit-title-input" placeholder="Tiêu đề" class='form-control' value="${data['title_shorten']}">
+                <input type="text" id="note-edit-title-input" placeholder="Tiêu đề" class='form-control' value="${data['title']}">
             </div>
             <div id="note-edit-content">
                 <textarea name="txt" id="note-edit-txtarea" placeholder="Nội dung ghi chú" class="form-control">${data['content']}</textarea>
