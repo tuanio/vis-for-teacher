@@ -7,7 +7,7 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] tạo một dataframe lưu xếp loại của từng môn theo tên sinh viên
 [DONE] biểu đồ cột thể hiện số lượng xếp loại mỗi môn
 [DONE] nút tải file danh sách sinh viên thỏa truy vấn
-[DONE] boxplot thể hiện rank của các thành viên trong lớps
+[DONE] boxplot thể hiện rank của các thành viên trong lớp
 [DONE] số tín chỉ của cá nhân, trung bình của lớp, theo tiến độ, dropdown bằng dash, vẽ bằng matplotlib, stacked bar chart
 [DONE] nút [?] để instruction về cái biểu đồ đó, về các tham số trên biểu đồ
 [DONE] list danh sách sinh viên theo truy vấn custom lại một chiều cao nhất định, khoảng 500px, có thể cuộn
@@ -17,22 +17,34 @@ Requirement: phần mềm visualize điểm cho thầy cô
 [DONE] thay đổi size cho từng biểu đồ
 [DONE] chỉnh các biểu đồ cho vừa màn hình
 [DONE] auto resize plot khi thay đổi kích cỡ màn hình trang web (width > 1366 và width <= 1366)
+[DONE] Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
+[DONE] Chỉnh các tools được sử dụng trên thanh công cụ của plotly
 - (Trung) Nút dark mode
 - pie hiện số sinh viên dưới % điểm
 - boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
-- header, logo(100%), copyright, footer(50%)
+- header, logo(100%), copyright, footer(50%) (Toàn, Trung)
 - số sinh viên rớt môn đó, số sinh viên đậu môn đó
 - vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
+<<<<<<< HEAD
 - (Trung) Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
 - (Trung) Chỉnh các tools được sử dụng trên thanh công cụ của plotly
 - Chỉnh dark mode theo giờ
+=======
+- ghi chú (Tuấn)
+>>>>>>> 27b807fa139bfb12d1102b7ca122a7f4c951dfba
 
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
+<<<<<<< HEAD
 - khi thêm một note mới vào sinh viên này, nhưng đó là client, sẽ bị để lại ở các sinh viên khác
 - lúc lưu xong thì chưa cập nhật vào trong div list note, phải tắt đi mở lại hoặc mở sinh viên khác hay load lại trang mới được
 
 Optimize:
 - Database query quá chậm, cần khắc phục bằng các cách trong tương lai sau khi tìm được
 - Các biểu đồ cần tối ưu hóa cách vẽ
+=======
+- Lỗi sắp xếp thứ tự các xếp loại của bar_chart
+- first
+-asdsas
+>>>>>>> 27b807fa139bfb12d1102b7ca122a7f4c951dfba
