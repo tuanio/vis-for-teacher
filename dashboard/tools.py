@@ -52,3 +52,9 @@ def compare(o1, o2):
 def generate_note(user_id, student):
     ''' generate default note '''
     return Note.query.filter_by(author_id=user_id, student_name=student).all()
+
+def get_time_format(time):
+    '''
+        return formated time
+    '''
+    return str('%02d:%02d %02d/%02d/%04d'%(time.hour, time.minute, time.day, time.month, time.year))

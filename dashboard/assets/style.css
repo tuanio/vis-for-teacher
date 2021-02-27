@@ -152,6 +152,7 @@ body {
 
 #edit-note {
     padding: 10px;
+    display: none;
 }
 
 #note-edit-tools {

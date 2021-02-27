@@ -6,8 +6,8 @@ import os
 server = Flask(__name__)
 app = dash.Dash(server=server, update_title=None, url_base_pathname='/')
 
-env = 'dev'
-# env = 'production'
+# env = 'dev'
+env = 'production'
 
 if (env == 'dev'):
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_db/vis.db'
@@ -37,6 +37,7 @@ app.index_string = '''
     <body>
         {%app_entry%}
         <script src="https://kit.fontawesome.com/cab3a28685.js" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <footer>
             {%config%}
             {%scripts%}

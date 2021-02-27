@@ -1,6 +1,7 @@
 from app import *
 db.drop_all()
 db.create_all()
+from dashboard.tools import *
 
 db.session.add(WebsiteTrack(cnts=0))
 db.session.add(User(username='tuanio', password='ok', note_id=0))
@@ -40,4 +41,10 @@ db.session.add(
         student_name='Nguyễn Văn Anh Tuấn'
     )
 )
+db.session.commit()
+
+# update the time format
+notes = Note.query.all()
+for note in notes:
+    note.date_update_format = get_time_format(note.date_update)
 db.session.commit()

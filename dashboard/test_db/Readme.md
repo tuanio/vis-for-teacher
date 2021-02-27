@@ -1,0 +1,1 @@
+- Đây là thư mục chứa file database của sqlite khi ở chế độ dev, dùng cho mục đích test database local trên máy

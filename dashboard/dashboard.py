@@ -22,7 +22,7 @@ app.layout = html.Div([
                 [
                     html.Div(
                         [
-                        
+
                             html.Div(
                                 html.Img(
                                     src='assets/imgs/logo_iuh.png',
@@ -110,9 +110,9 @@ app.layout = html.Div([
                                 ],
                                 className='dropdown-menu p-4',
                                 style={
-                                    'fontSize': '14px', 
-                                    'maxWidth': '320px', 
-                                    'overflowWrap': 'break-word', 
+                                    'fontSize': '14px',
+                                    'maxWidth': '320px',
+                                    'overflowWrap': 'break-word',
                                     'boxShadow': '2px 2px 5px 0 #585959'
                                 },
                                 **{'aria-labelledby': 'boxplot_helper'},
@@ -178,7 +178,7 @@ app.layout = html.Div([
                     html.Div(
                         [
                             html.Div(
-                                'Danh sách sinh viên có điểm', 
+                                'Danh sách sinh viên có điểm',
                                 style={
                                     'paddingTop': '5px',
                                     'fontWeight': 'bold'
@@ -248,7 +248,7 @@ app.layout = html.Div([
                     html.Img(id='bar_chart', alt='ok')
                 ],
                 style={
-                    'width': '410px', 
+                    'width': '410px',
                 },
                 className='graph'
             ),
@@ -339,13 +339,14 @@ app.layout = html.Div([
                                 html.P(
                                     'Cập nhật mới nhất: 17:51 26/02/2021',
                                     className='note-sm-label'
-                                )
+                                ) 
                             ),
                             html.Div(
                                 dcc.Input(
                                     type='text',
                                     placeholder='Tiêu đề',
-                                    className='form-control'
+                                    className='form-control',
+                                    id='note-edit-title-input'
                                 ),
                                 id='note-edit-title'
                             ),
@@ -386,8 +387,10 @@ app.layout = html.Div([
                 ],
                 style={
                     'margin-left': '10px',
-                }
+                },
             ),
+            html.Div(id='template-note', style={'display': 'none'}),
+            html.Div(id="data-note", style={'display': 'none'}),
         ],
         style={"display": "flex"},
         id='second-layer'

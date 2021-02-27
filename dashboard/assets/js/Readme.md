@@ -1,0 +1,1 @@
+- Đây là thư mục để custom js, các file script trong thư mục này sẽ được tự thêm vào dash

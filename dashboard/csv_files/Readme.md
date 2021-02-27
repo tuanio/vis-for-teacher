@@ -1,0 +1,3 @@
+- Đây là thư mục tạm thời chứa các file csv và excel, dùng cho mục đích lưu trữ dữ liệu dạng file
+- Các file notebook, file python sẽ chạy dựa trên các dữ liệu này, và có thể sản tạo ra các file dữ liệu khác, và vẫn để trong thư mục này
+- Tương lai sẽ để trong hệ cơ sở dữ liệu

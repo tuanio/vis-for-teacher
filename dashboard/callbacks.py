@@ -1,4 +1,4 @@
-from dash.dependencies import Output, Input
+from dash.dependencies import Output, Input, ClientsideFunction
 import numpy as np
 import pandas as pd
 import plotly.express as px
@@ -9,6 +9,7 @@ from functools import cmp_to_key
 import matplotlib
 import matplotlib.pyplot as plt
 import os
+from flask import jsonify
 
 pd.options.mode.chained_assignment = None # default 'warn'
 matplotlib.use('Agg')
@@ -243,44 +244,36 @@ def stacked_bar(input_name):
     return ret
 
 @app.callback(
-    Output('show-note', 'children'),
+    Output('data-note', 'children'),
     [Input('dropdown_note', 'value')]
 )
-def callback_note(note_name):
+def data_note(note_name):
     '''
         Sẽ có thêm cái tham số user id, trước tiên chỉ lấy với tên sinh viên thôi
     '''
     # default 
     user_id = 0
-
     data = Note.query.filter_by(author_id=user_id, student_name=note_name).all()
+    ret = []
+    for i in data:
+        foo = dict(
+            id=i.id,
+            title_shorten=i.title_shorten,
+            student_name=i.student_name,
+            date_update_format=i.date_update_format
+        )
+        ret += [foo]
 
-    return [
-        html.Div(
-            [
-                html.Div(
-                    [
-                        html.A(
-                            [
-                                html.H5(
-                                    [i.title_shorten],
-                                    className='note-big-label'
-                                ),
-                                html.P(
-                                    [
-                                        'Cập nhật mới nhất: %02d:%02d %02d/%02d/%04d'%(i.date_update.hour, i.date_update.minute, i.date_update.day, i.date_update.month, i.date_update.year)
-                                    ],
-                                    className='note-sm-label',
-                                )
-                            ],
-                            href='javascript:void(0);',
-                            className='note-a',
-                            **{'data-id': str(i.id)}
-                        ),
-                    ],
-                    className='note-div'
-                ),
-            ],
-            className='note-component'
-        ) for i in data
-    ]
+    print(ret)
+
+    return str(ret)
+
+
+app.clientside_callback(
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='callback_note'
+    ),
+    Output('template-note', 'children'),
+    [Input('data-note', 'children')]
+)

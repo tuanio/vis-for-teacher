@@ -30,3 +30,9 @@ Requirement: phần mềm visualize điểm cho thầy cô
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
+- khi thêm một note mới vào sinh viên này, nhưng đó là client, sẽ bị để lại ở các sinh viên khác
+- lúc lưu xong thì chưa cập nhật vào trong div list note, phải tắt đi mở lại hoặc mở sinh viên khác hay load lại trang mới được
+
+Optimize:
+- Database query quá chậm, cần khắc phục bằng các cách trong tương lai sau khi tìm được
+- Các biểu đồ cần tối ưu hóa cách vẽ

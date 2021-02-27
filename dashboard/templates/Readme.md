@@ -1,0 +1,1 @@
+- Thư mục này để các file html dành cho các view của flask

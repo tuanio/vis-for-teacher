@@ -26,6 +26,7 @@ class Note(db.Model):
     title_shorten = db.Column(db.String(100))
     content = db.Column(db.String(1000))
     student_name = db.Column(db.String(100), nullable=False)
+    date_update_format = db.Column(db.String(100), default='')
 
     def __repr__(self):
-        return '<Note({}, {}, {}, {}, {}, {}, {})>'.format(self.id, self.author_id, self.date_update, self.title, self.title_shorten, self.student_name, self.content)
+        return '<Note({}, {}, {}, {}, {}, {}, {}, {})>'.format(self.id, self.author_id, self.date_update, self.title, self.title_shorten, self.student_name, self.date_update_format, self.content)

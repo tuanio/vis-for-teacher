@@ -1,0 +1,1 @@
+- Thư mục này chứa toàn bộ các yêu cầu từ nhỏ đến lớn của project này
