@@ -41,6 +41,7 @@ app.layout = html.Div([
                             ),
                         ],
                         id='header'
+                        # Chỗ này t sửa chỉ để push lên github
                     ),
                     html.Marquee(
                         'Huỳnh Minh Toàn đang xếp thứ I trong lớp Lập trình phân tích dữ liệu\
