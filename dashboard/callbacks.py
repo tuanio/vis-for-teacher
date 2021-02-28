@@ -116,7 +116,7 @@ def generate_chart(name_dropdown):
             x=bins,
             y=counts,
             labels={
-                'x': name_dropdown,
+                'x': 'Thang điểm',
                 'y': 'Số lượng'
             },
             color_discrete_sequence=[color],
@@ -126,7 +126,7 @@ def generate_chart(name_dropdown):
 
         fig_bar.update_traces(
             hovertemplate=
-                '<i><b>Xếp loại:</b> %{x}-%{text}<extra></extra></i><br>' + 
+                '<i><b>Khoảng điểm:</b> %{x}-%{text}<extra></extra></i><br>' + 
                 '<i><b>Số lượng:</b> %{y}</i>',
             text=[int(max(0, i + 49)) for i in bins]
         )

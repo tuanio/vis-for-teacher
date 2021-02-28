@@ -35,7 +35,7 @@ def onload(width, height):
     else:
         datas.size_plot = datas.size_big
 
-    return redirect('/')
+    return jsonify(width=width, height=height)
 
 @server.route('/track')
 def track():

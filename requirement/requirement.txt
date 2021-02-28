@@ -24,7 +24,7 @@ Requirement: phần mềm visualize điểm cho thầy cô
 - boxplot nhiều môn theo kì (https://stackoverflow.com/questions/62048679/creating-multiple-boxplots-using-plotly)
 - header, logo(100%), copyright, footer(50%) (Toàn, Trung)
 - số sinh viên rớt môn đó, số sinh viên đậu môn đó
-- vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
+[DONE] vẽ histogram cho 3 môn [tiếng anh 1, tiếng anh 2, chứng chỉ toeic 450] thay vì vẽ biểu đồ cột
 - (Trung) Chỉnh thông tin khi hover vào các biểu đồ lại cho gọn và vừa đủ thông tin
 - (Trung) Chỉnh các tools được sử dụng trên thanh công cụ của plotly
 - Chỉnh dark mode theo giờ
@@ -33,8 +33,8 @@ Requirement: phần mềm visualize điểm cho thầy cô
 Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
-- khi thêm một note mới vào sinh viên này, nhưng đó là client, sẽ bị để lại ở các sinh viên khác
-- lúc lưu xong thì chưa cập nhật vào trong div list note, phải tắt đi mở lại hoặc mở sinh viên khác hay load lại trang mới được
+[DONE] khi thêm một note mới vào sinh viên này, nhưng đó là client, sẽ bị để lại ở các sinh viên khác
+[DONE] lúc lưu xong thì chưa cập nhật vào trong div list note, phải tắt đi mở lại hoặc mở sinh viên khác hay load lại trang mới được
 
 Optimize:
 - Database query quá chậm, cần khắc phục bằng các cách trong tương lai sau khi tìm được
