@@ -33,3 +33,4 @@ Bug:
 - Lỗi sắp xếp thứ tự các xếp loại của bar_chart
 - first
 -asdsas
+- s
