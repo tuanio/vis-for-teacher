@@ -7,6 +7,9 @@ class WebsiteTrack(db.Model):
     cnts = db.Column(db.Integer, default=0)
 
     def __repr__(self):
+        '''
+            print(cái WebsiteTrack sẽ hiển thị theo dạng dưới)
+        '''
         return 'Counts: %d' % (self.cnts)
 
 class User(db.Model):
