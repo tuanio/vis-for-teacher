@@ -67,44 +67,69 @@ def generate_chart(name_dropdown):
         title_x=0.5
     )
 
-    # Đếm
-    data_score = Counter(xeploai_df[name_dropdown])
-    
-    # Loại bỏ nan khỏi data sau khi đếm
-    if np.nan in data_score:
-        data_score.pop(np.nan)
 
-    # Sắp xếp giảm dần theo key
-    data_score = {i[0] : i[1] for i in sorted(data_score.items(), key=cmp_to_key(compare))}
+    if (name_dropdown not in ['Tiếng anh 1', 'Tiếng anh 2', 'Chứng chỉ TOEIC 450']):
+        # Đếm
+        data_score = Counter(xeploai_df[name_dropdown])
+        
+        # Loại bỏ nan khỏi data sau khi đếm
+        if np.nan in data_score:
+            data_score.pop(np.nan)
 
-    # Chuyển dữ liệu đếm thành một dataframe
-    data_score_df = pd.DataFrame({
-        'Xếp loại': data_score.keys(),
-        'Số lượng': data_score.values()
-    })
+        # Sắp xếp giảm dần theo key
+        data_score = {i[0] : i[1] for i in sorted(data_score.items(), key=cmp_to_key(compare))}
 
-    data_score_df = data_score_df[data_score_df['Xếp loại'] != np.nan]
+        # Chuyển dữ liệu đếm thành một dataframe
+        data_score_df = pd.DataFrame({
+            'Xếp loại': data_score.keys(),
+            'Số lượng': data_score.values()
+        })
 
-    # Trực quan hóa
-    fig_bar = px.bar(
-        data_frame=data_score_df,
-        x='Xếp loại',
-        y='Số lượng',
-        title='Số lượng mỗi xếp loại',
-        width=datas.size_plot['bar_xeploai'][0],
-        height=datas.size_plot['bar_xeploai'][1],
-        color_discrete_sequence=[color]
-    )
+        data_score_df = data_score_df[data_score_df['Xếp loại'] != np.nan]
 
-    # Config hovertemplate
-    fig_bar.update_traces(
-        hovertemplate=
-            '<i><b>Xếp loại:</b> %{x}</i><extra></extra><br>' + 
-            '<i><b>Số lượng:</b> %{y}</i>'
-    )
+        # Trực quan hóa
+        fig_bar = px.bar(
+            data_frame=data_score_df,
+            x='Xếp loại',
+            y='Số lượng',
+            title='Số lượng mỗi xếp loại',
+            width=datas.size_plot['bar_xeploai'][0],
+            height=datas.size_plot['bar_xeploai'][1],
+            color_discrete_sequence=[color]
+        )
 
-    # center the title
-    fig_bar.update_layout(title_x=0.5)
+        # Config hovertemplate
+        fig_bar.update_traces(
+            hovertemplate=
+                '<i><b>Xếp loại:</b> %{x}</i><extra></extra><br>' + 
+                '<i><b>Số lượng:</b> %{y}</i>'
+        )
+
+        # center the title
+        fig_bar.update_layout(title_x=0.5)
+    else:
+        
+        counts, bins = np.histogram(df[name_dropdown], bins=range(0, 990, 50))
+        bins = bins[:-1]
+
+        fig_bar = px.bar(
+            x=bins,
+            y=counts,
+            labels={
+                'x': name_dropdown,
+                'y': 'Số lượng'
+            },
+            color_discrete_sequence=[color],
+            width=size_plot['bar_xeploai'][0],
+            height=size_plot['bar_xeploai'][1]
+        )
+
+        fig_bar.update_traces(
+            hovertemplate=
+                '<i><b>Xếp loại:</b> %{x}-%{text}<extra></extra></i><br>' + 
+                '<i><b>Số lượng:</b> %{y}</i>',
+            text=[int(max(0, i + 49)) for i in bins]
+        )
 
     # Trả về 1 tuple có 2 phần tử là 2 output
     return fig_boxplot, fig_bar
