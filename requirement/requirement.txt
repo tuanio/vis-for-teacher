@@ -31,3 +31,5 @@ Bug:
 [DONE] key 'Những nguyên lý cơ bản của Chủ nghĩa Mác - Lênin' ko có trong dataframe
 [DONE] cái dropdown vẫn chưa chạy
 - Lỗi sắp xếp thứ tự các xếp loại của bar_chart
+- first
+-asdsas
