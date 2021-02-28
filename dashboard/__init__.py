@@ -6,8 +6,8 @@ import os
 server = Flask(__name__)
 app = dash.Dash(server=server, update_title=None, url_base_pathname='/')
 
-# env = 'dev'
-env = 'production'
+env = 'dev'
+# env = 'production'
 
 if (env == 'dev'):
     server.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test_db/vis.db'

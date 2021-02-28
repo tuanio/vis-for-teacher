@@ -75,8 +75,8 @@ def generate_chart(name_dropdown):
         data_score.pop(np.nan)
 
     # Sắp xếp giảm dần theo key
-    data_score = {i[0] : i[1] for i in sorted(Counter(xeploai_df[name_dropdown]).items(), key=cmp_to_key(compare)) if i[0] != np.nan}
-    
+    data_score = {i[0] : i[1] for i in sorted(data_score.items(), key=cmp_to_key(compare))}
+
     # Chuyển dữ liệu đếm thành một dataframe
     data_score_df = pd.DataFrame({
         'Xếp loại': data_score.keys(),
@@ -195,7 +195,6 @@ def score(input_op, input_score):
     [Input('input_name', 'value')]
 )
 def stacked_bar(input_name):
-
     tin_chi_tb_lop_ds = ceil(np.array([so_tin_chi_sv(i) for i in classmate]).mean())
 
     foo = [so_tin_chi_sv(input_name), tin_chi_tb_lop_ds]
@@ -221,13 +220,8 @@ def stacked_bar(input_name):
             else:
                 data = bar
                 y = (rect.get_y() + so_tin_chi_cua_nganh) / 2
-            ax.text(
-                x, y,
-                data[x],
-                ha='center',
-                va='bottom',
-                fontsize=12
-            )
+
+            ax.text(x, y, data[x], ha='center', va='bottom', fontsize=12)
 
     auto_label(bar1, True)
     auto_label(bar2, False)
@@ -263,9 +257,6 @@ def data_note(note_name):
             date_update_format=i.date_update_format
         )
         ret += [foo]
-
-    print(ret)
-
     return str(ret)
 
 

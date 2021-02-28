@@ -137,8 +137,21 @@ app.layout = html.Div([
                 ],
                 style={'display': 'flex'}
             ),
-            html.Div(style={'height': '10px'}),
-            html.Div(style={'height': '5px'}),
+            html.Div(
+                [
+                    html.P(
+                        [
+                            html.I(className='fas fa-asterisk'),
+                            ' Những môn học không có sinh viên nào học sẽ không được hiển thị lên trên thanh tìm kiếm'
+                        ]
+                    ),
+                ],
+                style={
+                    'fontSize': 'small', 
+                    'margin': '10px 0',
+                    'color': 'gray'
+                }
+            ),
             html.Div(
                 [
                     html.Div(
