@@ -2,6 +2,7 @@
     --color_of_vis: #499167;
 }
 
+
 #output_test {
     overflow-y: auto; 
     height: 365px;
@@ -66,25 +67,9 @@ body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#header {
-    margin: 10px 0;
-    display: flex;
-}
-
-.logo-img-iuh {
-    width: 200px;
-}
-
-.logo-img-k15ds {
-    width: 100px;
-}
-
-#logo-k15ds {
-    padding-top: 18px;
-}
-
 .container {
     width: 1500px;
+    /* background-color: #499167; */
 }
 
 #show-note {

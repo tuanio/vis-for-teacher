@@ -22,11 +22,10 @@ app.layout = html.Div([
                 [
                     html.Div(
                         [
-
                             html.Div(
                                 html.Img(
                                     src='assets/imgs/logo_iuh.png',
-                                    className='img-thumbneil float-left logo-img logo-img-iuh',
+                                    className='img-thumbneil float-left logo-img logo-img-iuh'
                                 ),
                                 id='logo-iuh',
                                 className='logo'
@@ -34,14 +33,32 @@ app.layout = html.Div([
                             html.Div(
                                 html.Img(
                                     src='assets/imgs/logo_k15ds.png',
-                                    className='img-thumbneil float-left logo-img logo-img-k15ds',
+                                    className='img-thumbneil float-left logo-img logo-img-k15ds'
                                 ),
                                 id='logo-k15ds',
                                 className='logo'
                             ),
+                            html.Div(
+                                html.Img(
+                                    src="assets/imgs/logo_vft.png",
+                                    className='img-thumbneil logo-img logo-img-vft'
+                                ),
+                                id='logo-vft',
+                                className='logo'
+                            ),
+                            html.Div(
+                                html.Label(
+                                    [
+                                        dcc.Input(type='checkbox', id='checkbox'),
+                                        html.Div(className='slider round')
+                                    ],
+                                    className='theme-switch',
+                                    htmlFor='checkbox'
+                                ),
+                                className='theme-switch-wrapper'
+                            )
                         ],
                         id='header'
-                        # Chỗ này t sửa chỉ để push lên github
                     ),
                     html.Marquee(
                         'Huỳnh Minh Toàn đang xếp thứ I trong lớp Lập trình phân tích dữ liệu\
