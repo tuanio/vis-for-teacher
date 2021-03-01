@@ -47,14 +47,27 @@ app.layout = html.Div([
                                 className='logo'
                             ),
                             html.Div(
-                                html.Label(
-                                    [
-                                        dcc.Input(type='checkbox', id='checkbox'),
-                                        html.Div(className='slider round')
-                                    ],
-                                    className='theme-switch',
-                                    htmlFor='checkbox'
-                                ),
+                                [
+                                    html.Div(html.Button('Sign Up', id='btn-sign-up'), className='sign-up'),
+                                    html.Div(html.Button('Login', id='btn-login'), className='login')
+                                ],
+                                className='form-login'
+                            ),
+                            html.Div(
+                                [
+                                    html.Img(
+                                        src="assets/imgs/dark_mode.png",
+                                        id='icon-dark-mode'
+                                    ),
+                                    html.Label(
+                                        [
+                                            dcc.Input(type='checkbox', id='checkbox'),
+                                            html.Div(className='slider round')
+                                        ],
+                                        className='theme-switch',
+                                        htmlFor='checkbox'
+                                    )
+                                ],
                                 className='theme-switch-wrapper'
                             )
                         ],

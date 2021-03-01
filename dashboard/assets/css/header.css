@@ -20,7 +20,7 @@
 
 /* config logo vft */
 #logo-vft {
-    margin-left: 30px;
+    margin-left: 45px;
 }
 
 /* config form log in */
@@ -33,8 +33,8 @@
     display: flex;
     align-items: center;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 50px;
+    right:300px;
     z-index: 1000;
 }
 
@@ -85,4 +85,57 @@ input:checked + .slider::before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+#icon-dark-mode {
+    width: 34px;
+    height: 34px;
+    margin-right: 5px;
+}
+
+/* config form login */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+
+.form-login {
+    display: flex;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+}
+
+#btn-sign-up {
+    width: 85px;
+    height: 34px;
+    margin-top: 40px;
+    margin-left: 55px;
+    margin-right: 5px;
+    border-radius: 4px;
+    color: #499167;
+    border: 1px solid #499167;
+    transition: 0.3s;
+    background-color: rgb(245,245,245);
+    cursor: pointer;
+    text-align: center;
+}
+
+#btn-sign-up:hover {
+    background-color: #499167;
+    color: white;
+}
+
+#btn-login {
+    width: 75px;
+    height: 34px;
+    margin-top: 40px;
+    border-radius: 4px;
+    color: #499167;
+    border: 1px solid #499167;
+    transition: 0.3s;
+    background-color: rgb(245,245,245);
+    cursor: pointer;
+    text-align: center;
+}
+
+#btn-login:hover {
+    background-color: #499167;
+    color: white;
 }
