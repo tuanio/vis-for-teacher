@@ -4,7 +4,7 @@ checkElement('#show-note-btn').then((selector) => {
     });
 });
 
-let createDivNoteComponent = (data) => {
+function createDivNoteComponent(data) {
     let divNoteComponent = document.createElement('div');
     divNoteComponent.setAttribute('class', 'note-component');
     divNoteComponent.setAttribute('data-id', `${data['id']}`);
@@ -31,27 +31,26 @@ let createDivNoteComponent = (data) => {
     return divNoteComponent;
 }
 
-let toggleNoteEdit = (flag = false) => {
+function toggleNoteEdit(flag = false) {
     /*
         - xét sự kiện bật tắt cho div note edit, true thì bật, false thì tắt
     */
-
     let editNote = document.querySelector('#edit-note');
     editNote.style.display = flag ? 'block' : 'none';
 }
 
-let toggleNoteListAndEdit = (editFlag = false) => {
+function toggleNoteListAndEdit(editFlag = false) {
     // set sự kiện cho nút nhấn
     /*
         - khi mà nhấn nút sẽ thay đổi trạng thái của data-flag, 1 nghĩa là có show, 0 nghĩa là không show
+        - editFlag là flag bật tắt của div edit note
+        - flag là flag bật tắt của div list note
     */
     checkElement('.note-container').then((selec) => {
         let flag = parseInt(selec.getAttribute('data-flag'));
         selec.style.display = flag ? 'none' : 'block';
         selec.setAttribute('data-flag', 1 ^ flag);
-
         toggleNoteEdit(flag & editFlag);
-
         // đổi class cho thẻ a, nghĩa là đổi giao diện của thẻ dựa trên bootstrap
         document.querySelector('#show-note-btn-a').className = 'btn btn-' + (!flag ? 'success' : 'outline-success');
 
@@ -62,18 +61,19 @@ checkElement('#add-note-btn a').then((selector) => {
     selector.addEventListener('click', () => {
         // react-select-5--value-item is a dropdown selector
         let dropdownNote = document.querySelector('#react-select-5--value-item');
-
         let showNote = document.querySelector('#show-note');
-
-        fetch(`/add-note/${dropdownNote.textContent}`).then(data => data.json()).then((data) => {
-            showNote.appendChild(createDivNoteComponent(data));
-        });
+        (async () => {
+            let response = await fetch(`/add-note/${dropdownNote.textContent}`);
+            let json = await response.json();
+            showNote.appendChild(createDivNoteComponent(json));
+        })();
     });
 });
 
-
 function viewNote(id) {
-    fetch(`/view-note/${id}`).then(data => data.json()).then((data) => {
+    (async () => {
+        let response = await fetch(`/view-note/${id}`);
+        let data = await response.json();
         let noteTemplate = `
             <div>
                 <p class="note-sm-label">Cập nhật mới nhất: ${data['date_update_format']}</p>
@@ -97,39 +97,35 @@ function viewNote(id) {
         `;
         document.querySelector('#edit-note').innerHTML = noteTemplate;
         toggleNoteListAndEdit(true);
-    });
-
+    })();
 }
 
 function saveNote(id) {
-    let data = {
-        id: id,
-        title: document.querySelector('#note-edit-title-input').value,
-        content: document.querySelector('#note-edit-txtarea').value
-    }
+    let title = document.querySelector('#note-edit-title-input').value;
+    let content = document.querySelector('#note-edit-txtarea').value;
+    // var has larger scope than let
+    var data = {id, title, content};
 
-    fetch('/save-note', {
-        method: 'POST',
-        headers: {'Content-type': 'application/x-www-form-urlencoded;UTF-8'},
-        body: JSON.stringify(data)
-    }).then(data => data.json()).then((data) => {
+    (async () => {
+        let response = await fetch('/save-note', {
+            method: 'POST',
+            headers: {'Content-type': 'application/x-www-form-urlencoded;UTF-8'},
+            body: JSON.stringify(data)
+        });
+        let json = await response.json();
         toggleNoteListAndEdit(false);
-        
         // gán trở lại cái title_shorten để hiện thị trong danh sách note
-        document.querySelector(`.note-component[data-id="${id}"] > div > a > h5`).innerHTML = data['title_shorten'];
-        document.querySelector(`.note-component[data-id="${id}"] > div > a > p`).innerHTML = 'Cập nhật mới nhất: ' + data['date_update_format'];
-        
-    }).catch(err => console.error(err));
+        document.querySelector(`.note-component[data-id="${id}"] > div > a > h5`).innerHTML = json['title_shorten'];
+        document.querySelector(`.note-component[data-id="${id}"] > div > a > p`).innerHTML = 'Cập nhật mới nhất: ' + json['date_update_format'];
+    })().catch(console.log);
 }
 
 function deleteNote(id) {
     // form xác nhận hiện tại cứ sử dụng cái này
     let result = confirm('Bạn có chắc muốn xóa ghi chú không');
     if (result === true) {
-
-        fetch(`/delete-note/${id}`).then(res => res.json());
+        fetch(`/delete-note/${id}`);
         toggleNoteListAndEdit(false);
-
         // xóa theo data-id, xóa note khi đã nhấn
         let el = document.querySelector(`.note-component[data-id="${id}"]`);
         el.remove();
@@ -149,5 +145,5 @@ window.dash_clientside = Object.assign({}, window.dash_clientside, {
             }
             return "html.Div('okbro')";
         }
-    } 
+    }
 });
