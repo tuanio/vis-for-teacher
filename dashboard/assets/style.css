@@ -3,7 +3,7 @@
 }
 
 #output_test {
-    overflow-y: auto; 
+    overflow-y: auto;
     height: 365px;
 }
 
@@ -63,7 +63,7 @@ body {
 
 .footer p {
     font-weight: bold;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #header {
