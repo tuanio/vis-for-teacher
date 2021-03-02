@@ -444,5 +444,8 @@ app.layout = html.Div([
             html.P(['Made by 3T Team and the respected teacher from IUH with ', html.I(className='fas fa-heart')]),
         ],
         className='footer graph'
+    ),
+    html.Script(
+        src='assets/js/header.js'
     )
 ], className='container')

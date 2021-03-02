@@ -1,3 +1,14 @@
+:root {
+    --white: white;
+    --black: black;
+    --green: #499167;
+}
+[data-theme="dark"] {
+    --white: black;
+    --black: white;
+    --green: orange;
+}
+
 #header {
     margin: 10px 0;
     display: flex;
@@ -109,8 +120,8 @@ input:checked + .slider::before {
     margin-left: 55px;
     margin-right: 5px;
     border-radius: 4px;
-    color: #499167;
-    border: 1px solid #499167;
+    color: var(--green);
+    border: 1px solid var(--green);
     transition: 0.3s;
     background-color: rgb(245,245,245);
     cursor: pointer;
@@ -118,7 +129,7 @@ input:checked + .slider::before {
 }
 
 #btn-sign-up:hover {
-    background-color: #499167;
+    background-color: var(--green);
     color: white;
 }
 
@@ -127,8 +138,8 @@ input:checked + .slider::before {
     height: 34px;
     margin-top: 40px;
     border-radius: 4px;
-    color: #499167;
-    border: 1px solid #499167;
+    color: var(--green);
+    border: 1px solid var(--green);
     transition: 0.3s;
     background-color: rgb(245,245,245);
     cursor: pointer;
@@ -136,6 +147,6 @@ input:checked + .slider::before {
 }
 
 #btn-login:hover {
-    background-color: #499167;
+    background-color: var(--green);
     color: white;
 }
