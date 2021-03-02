@@ -39,3 +39,4 @@ Bug:
 Optimize:
 - Database query quá chậm, cần khắc phục bằng các cách trong tương lai sau khi tìm được
 - Các biểu đồ cần tối ưu hóa cách vẽ
+- Thêm thắt
