@@ -206,11 +206,13 @@ def score(input_op, input_score):
 
     ret_df.to_excel(filename)
 
+    file_download_name = 'csv_files/list_student.xlsx'
+
     download_list_link = html.A(
                             [
                                 html.I(className='fas fa-file-download')
                             ], 
-                            href='/download/{}'.format(filename), 
+                            href='/download/{}'.format(file_download_name), 
                             className='btn btn-outline-success',
                         )
     return ans, download_list_link, percent
