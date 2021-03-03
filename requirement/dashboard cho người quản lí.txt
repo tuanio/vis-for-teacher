@@ -1,0 +1,12 @@
+đơn vị quản lí: 
+quan tâm từng ngành một
+- thống kê toàn bộ khoa, khóa nào đó, theo ngành
+(điểm trung bình K15DS, K15CS..., trung bình điểm ngành cntt, kế toán). Một dashboard 5 cột gì đó...
+- So sánh giữa ngành này và ngành khác, so sánh giữa học kì này và học kì trước...
+
+- người quản lí muốn xem:
++ từ tổng quan -> đến xem theo lớp
++ từ tổng quan -> xem theo ngành
++ từ tổng quan -> xem theo khóa
+
+-> đề tài: giới thiệu, vai trò của trực quan hóa dữ liệu, các lý thuyết về trực quan hóa, dùng kỹ thuật nào cho từng phần, dùng vis phục vụ cho giáo viên chủ nhiệm. -> đó là lý do mà chọn vis để giải quyết bài toán này.

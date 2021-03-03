@@ -67,6 +67,9 @@ def generate_chart(name_dropdown):
         title_x=0.5
     )
 
+    # fig_boxplot.layout.plot_bgcolor = 'black'
+    # fig_boxplot.layout.paper_bgcolor = 'black'
+
 
     if (name_dropdown not in ['Tiếng anh 1', 'Tiếng anh 2', 'Chứng chỉ TOEIC 450']):
         # Đếm
@@ -232,8 +235,10 @@ def stacked_bar(input_name):
 
     fig, ax = plt.subplots(figsize=(4, 4))
 
-    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor='black', color=color)
-    bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor='black', color='#FFFFFF')
+    edgecolor = 'white'
+
+    bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor=edgecolor, color=color)
+    bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor=edgecolor, color='#FFFFFF')
 
     # so_tin_chi_cua_nganh 
     so_tin_chi_cua_nganh = 146
@@ -255,6 +260,8 @@ def stacked_bar(input_name):
 
     plt.xticks(ind, [input_name, 'Trung bình lớp K15DS'], fontsize=10)
     fig.suptitle('Số tín chỉ đã tích lũy của ' + input_name, fontsize=12)
+    ax.patch.set_facecolor('black')
+    fig.patch.set_facecolor('black')
     plt.legend(loc='upper center')
     input_name = input_name.replace(' ', '')
     cwd = os.getcwd()

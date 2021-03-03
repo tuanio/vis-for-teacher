@@ -1,0 +1,36 @@
+sv feedback, complaint
+dùng cho khoa cntt
+tìm sv theo tên, mã số, chhuongw trình học cntt
+trực quan theo chương trình học
+điểm đến tình hình hiện tạ
+đăng ký học phần. sau đợt 1 đăng kí bao nhiêu, môn gì. số tín chỉ của từng sinh viên -> đưa ra cảnh báo cho giảng viên. góc cảnh báo, do mình đưa ra. 
+
+dashboard giảng viên, ddasshboard quản lí
+
+chia môn theo học kì
+
+số lượng mỗi thống kê, có sẵn ở kế bên
+
+số lượng cộng dồn của từng môn, xếp loại
+thống kê đạt và không đạt
+
+box plot hơi rối, khó nhìn. Không sử dunnjg boxplot, thay vào đó là đưa ra thống kê từng môn. boxplot ko đủ trực quan. Đưa barchart sang bên trái. Các tham số. Chọn trong [?] để hiện ra biểu đồ. Điểm 0(hoặc điểm cuối kì 0, hoặc bỏ môn). Các tham số, độ lệch, mean
+
+đưa ra theo từng học kì (dropdown) hk theo niên chế
+
+Đưa ra danh sách theo từng học kì, từng học kì cho đến tất cả. (Điểm trung bình tích lũy đến thời điểm hiện tại).
+
+Tín chỉ theo biểu đồ cột, theo số lượng từ cao đến thấp. Tín chỉ theo toàn danh sách lớp. Có thể dài toàn màn hình(Dùng để so sánh giữa từng sinh viên). Số tín chỉ mong đợi cho đến học kì này(số học kì theo niên giám). (Có thể là một đường linear). 
+
+Dữ liệu đăng kí môn.(đóng tiền hay chưa, nhắc đóng tiền) -> đưa ra cảnh báo cho giảng viên, báo cho phụ huynh.
+
+từ dữ liệu điểm đưa ra cảnh báo ->
+- tính theo học kì thì sinh viên nào điểm thấp môn nào, đưa ra trường hợp khen thưởng cho các bạn tốt. Cảnh báo hiện lên, cho từng học kì
+
+
+- là giáo viên chủ nhiệm, quan tâm:
++ kết thúc học kì vừa rồi thì điểm như thế nào
++ điểm của từng học kì(theo niên chế)
++ 
+
+- có dữ liệu của 1 lớp thì làm dc như trên, nên muốn xin dữ liệu của khoa để vis thêm
