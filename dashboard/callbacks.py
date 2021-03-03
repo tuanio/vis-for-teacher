@@ -235,7 +235,7 @@ def stacked_bar(input_name):
 
     fig, ax = plt.subplots(figsize=(4, 4))
 
-    edgecolor = 'white'
+    edgecolor = 'black'
 
     bar1 = plt.bar(ind, foo, width, label='Đã học', edgecolor=edgecolor, color=color)
     bar2 = plt.bar(ind, bar, width, bottom=foo, label='Chưa học', edgecolor=edgecolor, color='#FFFFFF')
@@ -260,8 +260,6 @@ def stacked_bar(input_name):
 
     plt.xticks(ind, [input_name, 'Trung bình lớp K15DS'], fontsize=10)
     fig.suptitle('Số tín chỉ đã tích lũy của ' + input_name, fontsize=12)
-    ax.patch.set_facecolor('black')
-    fig.patch.set_facecolor('black')
     plt.legend(loc='upper center')
     input_name = input_name.replace(' ', '')
     cwd = os.getcwd()
