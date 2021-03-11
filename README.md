@@ -14,4 +14,5 @@
 
 - Trong mỗi thư mục đều có các file Readme.md, để mô tả cho thư mục đó.
 - This is the version 1. Using Dash and Flask for backend, plain HTML, CSS, Javascript for front end.
-[dashboard][dashboard.png]
+
+![dashboard][dashboard.png]
